@@ -5,7 +5,7 @@ This is currently a ```beta```, so some features may not work and some may not b
 
 # Try It Out
 You can test out the web application by clicking on the link provided below. Make sure you have a hyperPad project file `(.tap)` to test the app with! Please note that *.zip* files are **NOT** supported - the extension must be *.tap*!
-https://rxcodes.github.io/hyperPad-Project-Modder/
+## https://rxcodes.github.io/hyperPad-Project-Modder/
 
 # Functional Features
 ## Modify Objects
