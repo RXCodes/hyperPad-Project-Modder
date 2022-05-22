@@ -22,16 +22,16 @@ Modify screen position, zoom, scene type *(that means you can change an overlay 
 
 # Planned Features
 ## Plugins
-### Add / remove plugins from a project. A plugin is a mirrored object with behaviors that work together to perform advanced functionality in a project. The best part of these plugins is that it can imported into multiple projects with ease and work the same across all of them.
-### Create your own plugin - users can create their own plugin by putting all the necessary behaviors in one object and then saving it to their account to use in other projects. They have the choice of making the plugin public and sharing it with others.
+- **Add / remove plugins from a project** - A plugin is a mirrored object with behaviors that work together to perform advanced functionality in a project. The best part of these plugins is that it can imported into multiple projects with ease and work the same across all of them.
+- **Create your own plugin** - users can create their own plugin by putting all the necessary behaviors in one object and then saving it to their account to use in other projects. They have the choice of making the plugin public and sharing it with others.
 
 ## Behaviors Management
-### Transfer behaviors from one object to another - even if the objects are in different scenes and layers.
-### Delete all behaviors from the global world object.
-### Automatically format behavior trees. (Not sure of that yet!)
-### Behavior search and actions such as deleting and hiding.
+- **Transfer behaviors from one object to another** - even if the objects are in different scenes and layers.
+- Delete all behaviors from the global world object.
+- Automatically **format** behavior trees. (Not sure of that yet!)
+- Behavior search and actions such as deleting and hiding.
 
 ## Assets Management
-### Compress all assets to shrink overall project size - there will be compression options.
-### See file sizes of all assets - user can decide to delete assets that take more storage.
-### Multi-select assets and perform actions on all of them at once.
+- **Compress all assets** to shrink overall project size - there will be compression options.
+- See file sizes of all assets - user can decide to delete assets that take more storage.
+- Multi-select assets and perform actions on all of them at once.
