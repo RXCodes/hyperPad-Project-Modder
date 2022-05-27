@@ -1411,9 +1411,9 @@ function execHideBehaviors() {
   // hide behaviors
   let hidden = 0;
   toHide.forEach(function(id) {
-    let cmd = "update zbehaviourdata set ZX_POS = null where z_pk = " + id;
+    let cmd = "update zbehaviourdata set ZX_POS = -99999999999 where z_pk = " + id;
     db.run(cmd);
-    cmd = "update zbehaviourdata set ZY_POS = null where z_pk = " + id;
+    cmd = "update zbehaviourdata set ZY_POS = -99999999999 where z_pk = " + id;
     db.run(cmd);
     cmd = "update hiddenBehaviors set hidden = 1 where z_pk = " + id;
     db.run(cmd);
