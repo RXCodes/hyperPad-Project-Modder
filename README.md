@@ -31,9 +31,7 @@ Modify screen position, zoom, scene type *(that means you can change an overlay 
 
 ## Behaviors Management
 - **Transfer behaviors from one object to another** - even if the objects are in different scenes and layers.
-- Delete all behaviors from the global world object.
-- Automatically **format** behavior trees. (Not sure of that yet!)
-- Behavior search and actions such as deleting and hiding.
+- Perform batch actions such as transferring behaviors from one object to another or restricting edit access to behaviors in certain objects.
 
 ## Assets Management
 - **Compress all assets** to shrink overall project size - there will be compression options.
