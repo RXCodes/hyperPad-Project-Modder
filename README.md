@@ -10,7 +10,7 @@ You can test out the web application by clicking on the link provided below. Mak
 # Functional Features
 ## Modify Objects
 <img src='images/4103EF3A-AECC-4E13-A663-E867F4CA1284.jpeg' width=50%>
-Select mutliple objects throughout your **entire** project using a search algorithm and modify their properties such as ```object type```, ```transformation``` and much more! For example, you can change ```Empty``` Objects into ```Graphic``` Objects which was a highly requested feature! You can also delete multiple objects at once if you are trying to clear up some memory.
+Select mutliple objects throughout your **entire** project using a search algorithm and modify their properties such as <code>object type</code>, <code>transformation</code> and much more! For example, you can change ```Empty``` Objects into ```Graphic``` Objects which was a highly requested feature! You can also delete multiple objects at once if you are trying to clear up some memory.
 
 ## Downgrade Behaviors
 <img src='images/287AF35C-D225-4B58-9654-8B35BB242D3C.jpeg' width=50%>
