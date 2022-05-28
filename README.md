@@ -14,7 +14,7 @@ Select mutliple objects throughout your **entire** project using a search algori
 
 ## Downgrade Behaviors
 ![Downgrade Behaviors Menu](images/287AF35C-D225-4B58-9654-8B35BB242D3C.jpeg)
-Provide a target version and this app will try to downgrade all behaviors to the desired version - this can be useful if you are trying to make newer projects work in older versions of hyperPad, especially for hyperPad viewer.
+Provide a target version and this app will try to downgrade all behaviors to the desired version - this can be useful if you are trying to make newer projects work in older versions of hyperPad, especially for hyperPad viewer. Please note that for behaviors that don't exist on the viewer app, these behaviors will not function and execute at all.
 
 ## Edit Scene Data
 ![Edit Scene Menu](images/B47B39F0-86BE-47D4-B44A-14DE7FB44D8B.jpeg)
