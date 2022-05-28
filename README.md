@@ -9,19 +9,19 @@ You can test out the web application by clicking on the link provided below. Mak
 
 # Functional Features
 ## Modify Objects
-![Modify Objects Menu](images/4103EF3A-AECC-4E13-A663-E867F4CA1284.jpeg)
+<img src='images/4103EF3A-AECC-4E13-A663-E867F4CA1284.jpeg' width=50%/>
 Select mutliple objects throughout your **entire** project using a search algorithm and modify their properties such as ```object type```, ```transformation``` and much more! For example, you can change ```Empty``` Objects into ```Graphic``` Objects which was a highly requested feature! You can also delete multiple objects at once if you are trying to clear up some memory.
 
 ## Downgrade Behaviors
-![Downgrade Behaviors Menu](images/287AF35C-D225-4B58-9654-8B35BB242D3C.jpeg)
+<img src='images/287AF35C-D225-4B58-9654-8B35BB242D3C.jpeg'/>
 Provide a target version and this app will try to **downgrade all behaviors to the desired version** - this can be useful if you are trying to make newer projects work in older versions of hyperPad, especially for ```hyperPad viewer```. Please note that for behaviors that don't exist on the viewer app, these behaviors will not function and execute at all.
 
 ## Edit Scene Data
-![Edit Scene Menu](images/B47B39F0-86BE-47D4-B44A-14DE7FB44D8B.jpeg)
+<img src='images/B47B39F0-86BE-47D4-B44A-14DE7FB44D8B.jpeg'/>
 Modify screen position, zoom, scene type *(that means you can change an overlay to a level and vice versa!)* and many other properties of a specified scene.
 
 ## View Project Data
-![Project Details Menu](images/B31F9CE2-1BF4-4256-AD56-0C7093345A55.jpeg)
+<img src='images/B31F9CE2-1BF4-4256-AD56-0C7093345A55.jpeg'/>
 **See how many objects, behaviors and assets are present in the entire project.** For example, you can see how many of each behavior you've used! Don't worry about counting behaviors or keeping track of how many objects are in your scene - this app does that for you!
 
 # Planned Features
