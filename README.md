@@ -37,3 +37,11 @@ Modify screen position, zoom, scene type <i>(that means you can change an overla
 - **Compress all assets** to shrink overall project size - there will be compression options.
 - See file sizes of all assets - user can decide to delete assets that take more storage.
 - Multi-select assets and perform actions on all of them at once.
+
+# Version History
+View the earlier versions of hyperPad Project Modder.
+- v0.1: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.1.html
+- v0.2: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.2.html
+- v0.3: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.3.html
+- v0.4: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.4.html
+- v0.5 (current): https://rxcodes.github.io/hyperPad-Project-Modder/
