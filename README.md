@@ -44,4 +44,4 @@ View the earlier versions of hyperPad Project Modder.
 - v0.2: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.2.html
 - v0.3: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.3.html
 - v0.4: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.4.html
-- v0.5 (current): https://rxcodes.github.io/hyperPad-Project-Modder/
+- v0.5 **(current)**: https://rxcodes.github.io/hyperPad-Project-Modder/
