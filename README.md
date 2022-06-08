@@ -14,7 +14,7 @@ Select mutliple objects throughout your <b>entire</b> project using a search alg
 
 ## Manipulate Behaviors
 <img src='images/287AF35C-D225-4B58-9654-8B35BB242D3C.jpeg' width=50%>
-You can <b>downgrade</b> behaviors so the project can work in earlier versions of hyperPad. You can <b>transfer</b> behaviors from one object to another and <b>delete</b> behaviors in an object.
+You can <b>downgrade</b> behaviors so the project can work in earlier versions of hyperPad and you can <b>transfer</b> behaviors from one object to another. There is an option to <b>delete</b> behaviors in an object via the <code>Modify Objects</code> menu.
 
 ## Edit Scene Data
 <img src='images/B47B39F0-86BE-47D4-B44A-14DE7FB44D8B.jpeg' width=50%>
