@@ -9,7 +9,7 @@ You can test out the web application by clicking on the link provided below. Mak
 
 # Functional Features
 ## Plugins
-<img src='images/4103EF3A-AECC-4E13-A663-E867F4CA1284.jpeg' width=50%>
+<img src='images/5316D60E-2EB3-47A3-BC1A-485ED2DD1352.jpeg' width=50%>
 Users can create their own plugin by putting all the necessary behaviors in one object and then saving it to their account to use in other projects - that means you can clone behaviors from one project to another! Users also have the choice of making the plugin public and sharing it with others!
 
 ## Modify Objects
