@@ -10,7 +10,7 @@ You can test out the web application by clicking on the link provided below. Mak
 # Functional Features
 ## Plugins
 <img src='images/5316D60E-2EB3-47A3-BC1A-485ED2DD1352.jpeg' width=50%>
-Users can create their own <code>plugin</code> by putting all the necessary behaviors in one object and then saving it to their account to use in other projects - that means you can <b style='color:#00bb78'>clone behaviors</b> from one project to another! Users also have the choice of making the plugin public and sharing it with others!
+Users can create their own <code>plugin</code> by putting all the necessary behaviors in one object and then saving it to their account to use in other projects - that means you can <b style='color:#00bb78'>clone behaviors and assets</b> from one project to another! Users can share their plugins as a file and can also have the choice of making the plugin closed source to hide behaviors!
 
 ## Modify Objects
 <img src='images/4103EF3A-AECC-4E13-A663-E867F4CA1284.jpeg' width=50%>
@@ -42,4 +42,4 @@ View the earlier versions of hyperPad Project Modder.
 - v0.4: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.4.html
 - v0.5: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.5.html
 - v0.6: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.6.html
-- v0.7 **(INDEV)**: https://rxcodes.github.io/hyperPad-Project-Modder/
+- v0.7 **(CURRENT)**: https://rxcodes.github.io/hyperPad-Project-Modder/
