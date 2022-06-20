@@ -2440,23 +2440,44 @@ document.getElementById("assetsPrefix").addEventListener("input", assetUpdate);
      return throwError("Provided plugin already exists in the project")
    }
    
+   startPlaneAnimation();
+    hideIds.forEach(function(id) {
+    try {
+      document.getElementById(id).style.display = "none";
+    } catch(e) {};
+    });
+    document.getElementById("compilingPluginPercent").innerHTML = "0%";
+    document.getElementById("compilingPlugin").style.display = "block";
+   await wait(0.3)
+   
    // find highest object zpk
-   let ObjectZPK = -1;
+   let ObjectZPK = 1;
    let index = db.exec("select z_pk from zobjectdata");
    try {
      index[0].values.forEach(function(z) {
-       ObjectZPK = Math.max(z, ObjectZPK);
+       ObjectZPK = Math.max(z[0], ObjectZPK);
      })
    } catch(e) {console.error(e)}
    console.log("Highest Object ZPK: " + ObjectZPK);
    ObjectZPK++;
    
+   // find highest object pos zpk
+   let PosZPK = 1;
+   index = db.exec("select z_pk from zobjectposition");
+   try {
+     index[0].values.forEach(function(z) {
+       PosZPK = Math.max(z[0], PosZPK);
+     })
+   } catch(e) {console.error(e)}
+   console.log("Highest Object Position ZPK: " + PosZPK);
+   PosZPK++;
+   
    // find highest behavior zpk
-   let BehaviorZPK = -1;
+   let BehaviorZPK = 1;
    index = db.exec("select z_pk from zbehaviourdata");
    try {
      index[0].values.forEach(function(z) {
-       BehaviorZPK = Math.max(z, BehaviorZPK);
+       BehaviorZPK = Math.max(z[0], BehaviorZPK);
      })
    } catch(e) {console.error(e)}
    console.log("Highest Behavior ZPK: " + BehaviorZPK);
@@ -2500,64 +2521,113 @@ document.getElementById("assetsPrefix").addEventListener("input", assetUpdate);
      })
    }
    
-   try {
+   await wait(0.3);
+   let bColumns = db.exec("select * from zbehaviourdata limit 1")[0].columns;
+   let oColumns = db.exec("select * from zobjectdata limit 1")[0].columns;
+   let pColumns = db.exec("select * from zobjectposition limit 1")[0].columns;
+   console.log("assetcolumns")
+   let aColumns = db.exec("select * from zpathdata limit 1")[0].columns;
+   console.log(aColumns)
+   let ZLayer = 5;
+   
+   // try catch entire thing
+   let promise = new Promise(async function(resolve) {
+  try {
+     
+   let processedObjs = 0;
    objects.forEach(function(obj) {
+     BehaviorZPK++;
+     ObjectZPK++;
      
      // extract and set object data
-     console.log(obj);
+     console.log(obj)
      let statement;
+   
+     try {
+       ZLayer = db.exec("select z_pk from zlayerdata where zindex = -1")[0].values[0][0];
+     } catch(e) {}
+     db.run("INSERT into Z_5Objects values(" + ZLayer + "," + ObjectZPK + ")");
+     writes++;
+     console.info("Created object ZPK: " + ObjectZPK)
      
      // prepare and execute statement for zobjectdata if any
      let zObjectData;
      try {
      zObjectData = obj.zobjectdata[0].values[0];
-     zObjectData[obj.zobjectdata[0].columns.indexOf("Z_PK")] = ObjectZPK;
+     console.log(zObjectData)
+     zObjectData[oColumns.indexOf("Z_PK")] = ObjectZPK;
      statement = "INSERT INTO ZObjectData values(";
      for (a = 0; a < zObjectData.length; a++) {
        statement += "?,";
      }
      statement = statement.substring(0, statement.length - 1) + ")";
+     if (plugin.obfuscateObjects) {
+       zObjectData[oColumns.indexOf("ZNAME")] = obfuscateName();
+     }
+     
      sanitizeArray(zObjectData);
      let s = db.prepare(statement);
      s.bind(zObjectData);
      s.step();
-     } catch(e) {}
+     } catch(e) {console.error(e)}
      
      // prepare and execute statement for zobjectpos if any
      let zPosData;
      try {
+     PosZPK++;
      zPosData = obj.zposdata[0].values[0];
-     zPosData[obj.zposdata[0].columns.indexOf("Z_PK")] = ObjectZPK;
      statement = "INSERT INTO ZObjectPosition values(";
-     for (a = 0; a < zPosData.length; a++) {
+     for (a = 0; a < pColumns.length; a++) {
        statement += "?,";
      }
      statement = statement.substring(0, statement.length - 1) + ")";
-     
+       
      if (plugin.closedSource) {
-       zPosData[obj.zposdata[0].columns.indexOf("ZX")] = -999999999;
-       zPosData[obj.zposdata[0].columns.indexOf("ZY")] = -999999999;
-       zPosData[obj.zposdata[0].columns.indexOf("ZX_SCALE")] = 0;
-       zPosData[obj.zposdata[0].columns.indexOf("ZY_SCALE")] = 0;
-     }
-     
+       zPosData[pColumns.indexOf("ZX")] = -999999999;
+       zPosData[pColumns.indexOf("ZY")] = -999999999;
+     } 
+     zPosData[pColumns.indexOf("ZOBJECTS")] = ObjectZPK;    
+     zPosData[pColumns.indexOf("ZLAYERS")] = ZLayer;
+     zPosData[pColumns.indexOf("Z_PK")] = PosZPK;    
      sanitizeArray(zPosData);
      s = db.prepare(statement);
      s.bind(zPosData);
      s.step();
      
-     writes ++;
-     } catch(e) {}
+     writes++;
+     } catch(e) {
+       console.error(e)
+       zPosData = [0, 9, 14, 0, 0, 0, 0, 0.5, 0.5, 0, 0];
+       statement = "INSERT INTO ZObjectPosition values(";
+       for (a = 0; a < pColumns.length; a++) {
+         statement += "?,";
+       }
+       statement = statement.substring(0, statement.length - 1) + ")";
+
+       if (plugin.closedSource) {
+         zPosData[pColumns.indexOf("ZX")] = -999999999;
+         zPosData[pColumns.indexOf("ZY")] = -999999999;
+       } 
+       zPosData[pColumns.indexOf("ZOBJECTS")] = ObjectZPK;    
+       zPosData[pColumns.indexOf("ZLAYERS")] = ZLayer;
+       zPosData[pColumns.indexOf("Z_PK")] = PosZPK;    
+       sanitizeArray(zPosData);
+       s = db.prepare(statement);
+       s.bind(zPosData);
+       s.step();
+     }
      
      // extract and set behaviors if any
      let behaviors = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] // 13 params
+     
      try {
-     behaviors = obj.zbehaviourdata[0].values;
-     behaviors.forEach(function(behavior) {
-       behavior[obj.zbehaviourdata[0].columns.indexOf("Z_PK")] = BehaviorZPK;
-       behavior[obj.zbehaviourdata[0].columns.indexOf("ZOBJECT")] = ObjectZPK;
+       behaviors = obj.zbehaviourdata[0].values;
+       behaviors.forEach(async function(behavior) {
+         BehaviorZPK++;
+         try {
+         behavior[bColumns.indexOf("Z_PK")] = BehaviorZPK;
+         behavior[bColumns.indexOf("ZOBJECT")] = ObjectZPK;
        
-       try {
          statement = "INSERT INTO ZBehaviourData values(";
          for (a = 0; a < behavior.length; a++) {
            statement += "?,";
@@ -2565,38 +2635,42 @@ document.getElementById("assetsPrefix").addEventListener("input", assetUpdate);
          statement = statement.substring(0, statement.length - 1) + ")";
          
          if (plugin.closedSource) {
-           behavior[obj.zbehaviourdata[0].columns.indexOf("ZX_POS")] = -999999999;
-           behavior[obj.zbehaviourdata[0].columns.indexOf("ZY_POS")] = -999999999;
+           behavior[bColumns.indexOf("ZX_POS")] = -99999999;
+           behavior[bColumns.indexOf("ZY_POS")] = -99999999;
          }
          
          sanitizeArray(behavior);
          s = db.prepare(statement);
          s.bind(behavior);
          s.step();
-       } catch(e) {
-         console.error(e);
-         console.error(behavior);
-       }
-       BehaviorZPK++;
+       
+         
+         } catch(e) {}
        writes++;
-     })
+       })
      } catch(e) {}
      
      // create custom behavior for plugin
+     BehaviorZPK++;
+     try {
+     if (obj.zbehaviourdata.length == 0) {
+       obj.zbehaviourdata = db.exec("select * from zbehaviourdata limit 1")
+     }
      let behavior = behaviors[0];
      statement = "INSERT INTO ZBehaviourData values(";
-     for (a = 0; a < behavior.length; a++) {
+     for (a = 0; a < bColumns.length; a++) {
        statement += "?,";
      }
      statement = statement.substring(0, statement.length - 1) + ")";
      let installID = "Plugin/" + plugin.creationDate + "-" + Math.random()
-     behavior[obj.zbehaviourdata[0].columns.indexOf("Z_PK")] = BehaviorZPK;
-     behavior[obj.zbehaviourdata[0].columns.indexOf("ZOBJECT")] = ObjectZPK;
-     behavior[obj.zbehaviourdata[0].columns.indexOf("ZNAME")] = "Comment";
-     behavior[obj.zbehaviourdata[0].columns.indexOf("ZX_POS")] = -999999999;
-     behavior[obj.zbehaviourdata[0].columns.indexOf("ZY_POS")] = -999999999;
-     behavior[obj.zbehaviourdata[0].columns.indexOf("IS_ROOT")] = 0;
-     behavior[obj.zbehaviourdata[0].columns.indexOf("ZTAG")] = installID;
+     obj.zbehaviourdata[0].columns = bColumns;
+     behavior[bColumns.indexOf("Z_PK")] = BehaviorZPK;
+     behavior[bColumns.indexOf("ZOBJECT")] = ObjectZPK;
+     behavior[bColumns.indexOf("ZNAME")] = "Comment";
+     behavior[bColumns.indexOf("ZX_POS")] = -999999999;
+     behavior[bColumns.indexOf("ZY_POS")] = -999999999;
+     behavior[bColumns.indexOf("IS_ROOT")] = 0;
+     behavior[bColumns.indexOf("ZTAG")] = installID;
      let pluginData = JSON.parse(JSON.stringify(plugin));
      delete pluginData.objects;
      behavior[obj.zbehaviourdata[0].columns.indexOf("ZBEHAVIOURDESCRIPTION")] = {
@@ -2608,36 +2682,125 @@ document.getElementById("assetsPrefix").addEventListener("input", assetUpdate);
      s = db.prepare(statement);
      s.bind(behavior);
      s.step();
-     
-     // finish and repeat
-     let ZLayer = 5;
-     try {
-       ZLayer = db.exec("select z_pk from zlayerdata where zindex = -1")[0].values[0][0];
-     } catch(e) {}
-     db.run("INSERT into Z_5Objects values(" + ZLayer + "," + ObjectZPK + ")");
+     } catch(e) {
+       console.error(e)
+     }
      writes++;
-     console.info("Created object ZPK: " + ObjectZPK)
-     console.log("Ported Object & Position Data: " + zPosData);
-     console.log("Ported " + behaviors.length + " Behaviors");
-     BehaviorZPK++;
-     ObjectZPK++;
+     processedObjs++;
      
+     let percent = Math.round((processedObjs / objects.length) * 50);
+     percent += "%";
+     document.getElementById("compilingPluginPercent").innerHTML = percent;
    });
+     
+   document.getElementById("compilingPluginPercent").innerHTML = "50%";
+     
+   // asset importer
+   console.log("asset importer")
+   let assetZPK = db.exec("select z_max from z_primarykey where z_name = \"PathData\"")[0].values[0][0];
+   if (plugin.assetsCount) {
+     
+     console.log("AI")
+     if (plugin.hideAssets) {
+       let assetType = plugin.folderAliasType || "Graphic";
+       assetType = assetType.trim();
+       project.file("Assets/" + plugin.assetPath + "/.metaData.plist", '<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"> <plist version="1.0"> <dict> <key>assetType</key> <string>' + assetType + '</string> </dict> </plist>');
+       console.log("atob stuff")
+       project.file("Assets/" + plugin.assetPath + "/.thumbnail.png", window.atob(plugin.icon.substr(22)), {binary: true});
+       console.log("atob stuff2")
+       
+       assetZPK++;
+       let row = [0, 9, 1, assetType, "Assets/" + plugin.assetPath, Math.random(), ""];
+       let statement = "INSERT INTO ZPathData values(";
+       for (a = 0; a < row.length; a++) {
+         statement += "?,";
+       }
+       row[aColumns.indexOf("Z_PK")] = assetZPK;
+       statement = statement.substring(0, statement.length - 1) + ")";
+       sanitizeArray(row);
+       let s = db.prepare(statement);
+       s.bind(row);
+       s.step();
+       writes++;
+     }
+     
+     // find highest asset ZPK
+     console.log("Highest Asset ZPK: " + assetZPK);
+     assetZPK++;
+     
+     // port data
+     let hasAssetData = true;
+     try {
+     let data = plugin.assetData[0];
+     data.values.forEach(function(row) {
+       let statement = "INSERT INTO ZPathData values(";
+       for (a = 0; a < row.length; a++) {
+         statement += "?,";
+       }
+       row[data.columns.indexOf("Z_PK")] = assetZPK;
+       statement = statement.substring(0, statement.length - 1) + ")";
+       sanitizeArray(row);
+       let s = db.prepare(statement);
+       s.bind(row);
+       s.step();
+       writes++;
+       assetZPK++;
+     })
+     
+     db.run("update z_primarykey set z_max = " + assetZPK + " where z_name = " + JSON.stringify("PathData"));
+     } catch(e) {
+       hasAssetData = false;
+     };
+     
+     // import assets
+     let zip = new JSZip();
+     await zip.loadAsync(plugin.assets, {base64: true})
+     let count = 0;
+     let done = 0;
+     zip.forEach(async function(path) {
+       count++;
+     });
+     zip.forEach(async function(path) {
+       let newPath = path;
+       if (plugin.hideAssetsFromFile) {
+         if (!newPath.endsWith(".plist")) {
+           if (newPath.split(".").length > 1) {
+             newPath = ".asset." + newPath.split(".").pop();
+             console.log(newPath)
+           }
+         }
+       }
+       project.file("Assets/" + plugin.assetPath + "/" + newPath, await zip.file(path).async("blob"));
+       done++;
+       let p = 50 + Math.round((done / count) * 50);
+       document.getElementById("compilingPluginPercent").innerHTML = p + "%";
+       
+     });
+     
+   } 
      
    // bump up z_max
    db.run("update z_primarykey set z_max = " + BehaviorZPK + " where z_name = " + JSON.stringify("BehaviourData"));
    db.run("update z_primarykey set z_max = " + ObjectZPK + " where z_name = " + JSON.stringify("ObjectData"));
-   db.run("update z_primarykey set z_max = " + ObjectZPK + " where z_name = " + JSON.stringify("ObjectPosition"));
+   db.run("update z_primarykey set z_max = " + PosZPK + " where z_name = " + JSON.stringify("ObjectPosition"));
+   resolve(); 
      
-   } catch(e) {
+  } catch(e) {
      error = true;
-     throwError("Error porting plugin object(s): " + e)
+     throwError("Error porting plugin object(s): " + e);
+     managePlugins();
+     resolve();
    }
+     
+   });
    if (error) {
      return;
    }
+   await wait(0.5)
+   document.getElementById("compilingPluginPercent").innerHTML = "100%";
+   await wait(0.5);
    let delta = Date.now() - startTime;
-   throwSuccess("Successfully installed plugin - " + writes + " writes (" + delta + "ms)");
+   throwSuccess("Successfully installed plugin - " + writes + " writes (" + (delta / 1000) + "s)");
    managePlugins();
  }
   
