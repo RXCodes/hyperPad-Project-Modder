@@ -7,9 +7,6 @@ let zpkPatches = ["BehaviourData", "EditorData", "CollisionData", "CameraData", 
 zpkPatches.forEach(function(ZName) {
   patches[ZName + " ZPK Maximum Too Low"] = false;
 });
-patches["Duplicate Scenes Found"] = false;
-patches["Ghost Objects Found"] = false;
-patches["Ghost Behaviors Found"] = false;
 
 // diagnose
 this.commands = [];
