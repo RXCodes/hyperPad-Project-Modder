@@ -12,7 +12,7 @@ patches["Ghost Objects Found"] = false;
 patches["Ghost Behaviors Found"] = false;
 
 // diagnose
-exports.diagnose = function diagnose() {
+this.diagnose = function diagnose() {
   console.debug("Diagnosing");
   document.getElementById("patchFixText").innerHTML = "Diagnosing Vulnerabilites...";
 }
