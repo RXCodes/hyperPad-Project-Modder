@@ -41,6 +41,7 @@ this.diagnose = function diagnose() {
     zpkPatches.forEach(function(name) {
       if (actualZMax[name] < ZPKChecks[name]) {
         main.commands.push("update z_primarykey set Z_MAX = " + ZPKChecks[name] + " where Z_NAME = " + JSON.stringify(name));
+        patches[name + " ZPK Maximum Too Low"] = true;
       }
     });
       
