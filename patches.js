@@ -13,8 +13,8 @@ patches["Ghost Behaviors Found"] = false;
 
 // diagnose
 this.commands = [];
+let main = this;
 this.diagnose = function diagnose() {
-  let main = this;
   return new Promise(function(resolve) {
     console.debug("Diagnosing");
     document.getElementById("patchFixText").innerHTML = "Diagnosing Vulnerabilites...";
@@ -46,6 +46,7 @@ this.diagnose = function diagnose() {
     });
       
     main.execPatch = fixPatch;
+    console.debug("Done Diagnosing");
     resolve(patches);
   });
 }
