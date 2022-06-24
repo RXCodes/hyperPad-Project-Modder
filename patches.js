@@ -5,7 +5,7 @@ console.debug("Loaded Patches");
 // put patches
 let zpkPatches = ["BehaviourData", "EditorData", "CollisionData", "CameraData", "LayerData", "LevelData", "ObjectData", "ObjectPosition", "PathData", "ProjectData", "TileData", "TileSelectorData"]
 zpkPatches.forEach(function(ZName) {
-  patches[ZName + " ZPK Maximum Too Low"] = false;
+  patches[ZName + " Z_MAX Too Low"] = false;
 });
 
 // diagnose
@@ -38,7 +38,7 @@ this.diagnose = function diagnose() {
     zpkPatches.forEach(function(name) {
       if (actualZMax[name] < ZPKChecks[name]) {
         main.commands.push("update z_primarykey set Z_MAX = " + ZPKChecks[name] + " where Z_NAME = " + JSON.stringify(name));
-        patches[name + " ZPK Maximum Too Low"] = true;
+        patches[name + " Z_MAX Too Low"] = true;
       }
     });
       
