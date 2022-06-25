@@ -45,22 +45,24 @@ this.diagnose = function diagnose() {
     
     // look for bugged scenes
     try {
-      let scenes = db.exec("SELECT zindex, z_pk from zleveldata")[0];
+      let scenes = db.exec("SELECT zindex, z_pk, zscenetype from zleveldata")[0];
       let indexes = [];
       let zpks = [];
+      let scenetypes = [];
       scenes.values.forEach(function(index) {
         indexes.push(index[0]);
         zpks.push(index[1]);
+        scenetypes.push(index[2]);
       });
       let indexesDict = {};
       let sceneIndex = 0;
       indexes.forEach(function(val) {
-        if (indexesDict[val]) {
+        if (indexesDict[val + "-" + scenetypes[sceneIndex]) {
           patches["Bugged Level Data"] = true;
           let found = false;
           while (!found) {
             val++;
-            if (!indexesDict[val]) {
+            if (!indexesDict[val + "-" + scenetypes[sceneIndex]]) {
               found = true;
             }
           }
