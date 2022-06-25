@@ -69,7 +69,10 @@ this.diagnose = function diagnose() {
           indexes[sceneIndex] = val;
           indexesDict[val +  "-" + scenetypes[sceneIndex]] = true;
           let zpkChange = zpks[sceneIndex];
+          let name = db.exec("select zlevelname from zleveldata where Z_PK = " + zpkChange)[0].values[0];
+          name = JSON.stringify(name + " (Fixed)")
           main.commands.push("update zleveldata set zindex = " + val + " where Z_PK = " + zpkChange);
+          main.commands.push("update zleveldata set zlevelname = " + name + " where Z_PK = " + zpkChange);
         }
         indexesDict[val + "-" + scenetypes[sceneIndex]] = true;
         sceneIndex++;
