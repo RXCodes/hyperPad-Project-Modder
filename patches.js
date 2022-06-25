@@ -94,7 +94,11 @@ this.diagnose = function diagnose() {
         zpks.push(index[1]);
         
         let bg = db.exec("select zopacity from zcameradata where zlevel = " + index[0]);
-        if (bg.length !== 0) {
+        let val = 1;
+        try {
+          val = bg[0].values[0][0];
+        } catch(e) {}
+        if (val !== 1) {
           if (bg[0].values[0] !== 0) {
             patches["Bugged Scene Background"] = true;
             main.commands.push("update zcameradata set zopacity = 1 where zlevel = " + index[0]);
