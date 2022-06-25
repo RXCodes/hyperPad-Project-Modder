@@ -57,7 +57,7 @@ this.diagnose = function diagnose() {
       let indexesDict = {};
       let sceneIndex = 0;
       indexes.forEach(function(val) {
-        if (indexesDict[val + "-" + scenetypes[sceneIndex]) {
+        if (indexesDict[val + "-" + scenetypes[sceneIndex]]) {
           patches["Bugged Level Data"] = true;
           let found = false;
           while (!found) {
