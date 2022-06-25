@@ -67,11 +67,11 @@ this.diagnose = function diagnose() {
             }
           }
           indexes[sceneIndex] = val;
-          indexesDict[val] = true;
+          indexesDict[val +  "-" + scenetypes[sceneIndex]] = true;
           let zpkChange = zpks[sceneIndex];
           main.commands.push("update zleveldata set zindex = " + val + " where ZPK = " + zpkChange);
         }
-        indexesDict[val] = true;
+        indexesDict[val + "-" + scenetypes[sceneIndex]] = true;
         sceneIndex++;
       });
     } catch(e) {};
