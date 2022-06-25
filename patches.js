@@ -3,6 +3,7 @@ patches = {};
 console.debug("Loaded Patches");
 
 // put patches
+patches["Bugged Level Data"] = false;
 let zpkPatches = ["BehaviourData", "EditorData", "CollisionData", "CameraData", "LayerData", "LevelData", "ObjectData", "ObjectPosition", "PathData", "ProjectData", "TileData", "TileSelectorData"]
 zpkPatches.forEach(function(ZName) {
   patches[ZName + " Z_MAX Too Low"] = false;
@@ -41,6 +42,37 @@ this.diagnose = function diagnose() {
         patches[name + " Z_MAX Too Low"] = true;
       }
     });
+    
+    // look for bugged scenes
+    try {
+      let scenes = db.exec("SELECT zindex, z_pk from zleveldata")[0];
+      let indexes = [];
+      let zpks = [];
+      scenes.values.forEach(function(index) {
+        indexes.push(index[0]);
+        zpks.push(index[1]);
+      });
+      let indexesDict = {};
+      let sceneIndex = 0;
+      indexes.forEach(function(val) {
+        if (indexesDict[val]) {
+          patches["Bugged Level Data"] = true;
+          let found = false;
+          while (!found) {
+            val++;
+            if (!indexesDict[val]) {
+              found = true;
+            }
+          }
+          indexes[sceneIndex] = val;
+          indexesDict[val] = true;
+          let zpkChange = zpks[sceneIndex];
+          main.commands.push("update zleveldata set zindex = " + val + " where ZPK = " + zpkChange);
+        }
+        indexesDict[val] = true;
+        sceneIndex++;
+      });
+    } catch(e) {};
       
     main.execPatch = fixPatch;
     console.debug("Done Diagnosing");
