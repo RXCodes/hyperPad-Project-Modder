@@ -3,7 +3,9 @@ patches = {};
 console.debug("Loaded Patches");
 
 // put patches
-patches["Bugged Level Data"] = false;
+patches["Bugged Level ID"] = false;
+patches["Bugged Scene Background"] = false;
+patches["Duplicate Layers in Scene"] = false;
 let zpkPatches = ["BehaviourData", "EditorData", "CollisionData", "CameraData", "LayerData", "LevelData", "ObjectData", "ObjectPosition", "PathData", "ProjectData", "TileData", "TileSelectorData"]
 zpkPatches.forEach(function(ZName) {
   patches[ZName + " Z_MAX Too Low"] = false;
@@ -58,7 +60,7 @@ this.diagnose = function diagnose() {
       let sceneIndex = 0;
       indexes.forEach(function(val) {
         if (indexesDict[val + "-" + scenetypes[sceneIndex]]) {
-          patches["Bugged Level Data"] = true;
+          patches["Bugged Level ID"] = true;
           let found = false;
           while (!found) {
             val++;
@@ -76,6 +78,29 @@ this.diagnose = function diagnose() {
         }
         indexesDict[val + "-" + scenetypes[sceneIndex]] = true;
         sceneIndex++;
+      });
+    } catch(e) {};
+    
+    // look for weird background
+    try {
+      let scenes = db.exec("SELECT zcamera, z_pk, zscenetype from zleveldata")[0];
+      let indexes = [];
+      let zpks = [];
+      scenes.values.forEach(function(index) {
+        if (index[2] == 1) {
+          return;
+        }
+        indexes.push(index[0]);
+        zpks.push(index[1]);
+        
+        let bg = db.exec("select zopacity from zcameradata where zlevel = " + index[0]);
+        if (bg.length !== 0) {
+          if (bg[0].values[0] !== 0) {
+            patches["Bugged Scene Background"] = true;
+            main.commands.push("update zcameradata set zopacity = 1 where zlevel = " + index[0]);
+          }
+        }
+        
       });
     } catch(e) {};
       
