@@ -5,7 +5,7 @@ console.debug("Loaded Patches");
 // put patches
 patches["Bugged Level ID"] = false;
 patches["Bugged Scene Background"] = false;
-patches["Duplicate Layers in Scene"] = false;
+patches["Layers in Wrong Scenes"] = false;
 let zpkPatches = ["BehaviourData", "EditorData", "CollisionData", "CameraData", "LayerData", "LevelData", "ObjectData", "ObjectPosition", "PathData", "ProjectData", "TileData", "TileSelectorData"]
 zpkPatches.forEach(function(ZName) {
   patches[ZName + " Z_MAX Too Low"] = false;
@@ -107,7 +107,27 @@ this.diagnose = function diagnose() {
         
       });
     } catch(e) {};
-      
+    
+    // look for invalid layers
+    try {
+      let data = db.exec("SELECT * from zlayerdata");
+      let levels = {};
+      let columns = data[0].columns;
+      data[0].values.forEach(function(row) {
+        let lvl = row[columns.indexOf("ZLEVEL")];
+        let index = row[columns.indexOf("ZINDEX")];
+        let alias = lvl + "-" + index;
+        if (levels[alias]) {
+          lvl++;
+          patches["Layers in Wrong Scenes"] = true;
+          let zpk = row[columns.indexOf("Z_PK")];
+          main.commands.push("update zlayerdata set zlevel = " + lvl + " where z_pk = " + zpk);
+        }
+        levels[alias] = true;
+      });
+    } catch(e) {}
+    
+    // finish diagnosis  
     main.execPatch = fixPatch;
     console.debug("Done Diagnosing");
     resolve(patches);
