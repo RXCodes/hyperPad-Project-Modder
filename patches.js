@@ -86,7 +86,7 @@ this.diagnose = function diagnose() {
 var fixPatch = function() {
   let count = 0;
   let errors = 0;
-  this.commands.forEach(function() {
+  this.commands.forEach(function(cmd) {
     count++;
     try {
       db.run(cmd);
