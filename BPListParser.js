@@ -98,10 +98,24 @@ window.extract = function(data) {
               });
               v = val;
             }
-
+            
             if (className == "NSMutableArray") {
               delete v["$class"];
               v = v["NS.objects"];
+            }
+            
+            if (className == "NSNull") {
+              v = null;
+            }
+
+            if (className == "NSArray") {
+              delete v["$class"];
+              v = v["NS.objects"];
+              let arr = [];
+              v.forEach(function(UID) {
+                arr.push(actualObj[0]["$objects"][UID.UID]);
+              });
+              v = arr;
             }
 
             if (className == "NSMutableString") {
