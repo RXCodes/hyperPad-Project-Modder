@@ -166,6 +166,7 @@ window.extract = function(data) {
       // return output
       resolve(result);
     } catch(e) {
+      console.error(e);
       resolve({});
     }
 
