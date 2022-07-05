@@ -36,6 +36,8 @@ Modify screen position, zoom, scene type <i>(that means you can change an overla
 
 # Version History
 View the earlier versions of hyperPad Project Modder.
+
+## Beta Stage
 - v0.1: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.1.html
 - v0.2: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.2.html
 - v0.3: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.3.html
@@ -44,4 +46,11 @@ View the earlier versions of hyperPad Project Modder.
 - v0.6: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.6.html
 - v0.7: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.7.html
 - v0.8: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.8.html
-- v0.9: **(Current)**: https://rxcodes.github.io/hyperPad-Project-Modder/
+- v0.9: https://rxcodes.github.io/hyperPad-Project-Modder/versions/v0.9.html
+- v0.10: **(Current)**: https://rxcodes.github.io/hyperPad-Project-Modder/
+
+## Pre-Alpha Stage
+`Coming soon...`
+
+## Alpha Stage
+`Coming soon...`
