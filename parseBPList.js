@@ -11,11 +11,11 @@ window.extract = function(data) {
     try {
 
       // read file
-      let obj = bplist.parseBuffer(data);
+      let obj = await bplist.parseFile(data);
       objmain = obj[0]["$objects"][1]["NS.data"] || obj[0]["$objects"][1];
 
       // fetch data from file
-      let actualObj = bplist.parseBuffer(objmain);
+      let actualObj = await bplist.parseDile(objmain);
       meta = actualObj[0]["$objects"][1]
 
       // get keys
