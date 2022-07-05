@@ -32,7 +32,6 @@ Modify screen position, zoom, scene type <i>(that means you can change an overla
 ## Assets Management
 - **Compress all assets** to shrink overall project size - there will be compression options.
 - See file sizes of all assets - user can decide to delete assets that take more storage.
-- Multi-select assets and perform actions on all of them at once.
 
 # Version History
 View the earlier versions of hyperPad Project Modder.
