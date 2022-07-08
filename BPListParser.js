@@ -29,6 +29,7 @@ window.extract = function(data) {
       if (!meta["NS.keys"]) {
         console.debug(actualObj);
         console.log(JSON.stringify(actualObj));
+        meta = actualObj;
       }
       
       meta["NS.keys"].forEach(function(dict) {
