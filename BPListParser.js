@@ -25,7 +25,7 @@ window.extract = function(data) {
       let actualObj = bplist.parseBuffer(objmain);
       meta = actualObj[0]["$objects"][1]
       
-      console.debug(meta);
+      console.debug(JSON.stringify(meta));
       
       // get keys
       let keys = [];
