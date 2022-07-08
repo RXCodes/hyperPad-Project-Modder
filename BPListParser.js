@@ -3,6 +3,11 @@
 const bplist = require('bplist-parser');
 require("buffer")
 
+// parse buffer
+window.parseBuffer = function(data) {
+  return bplist.parseBuffer(data);
+}
+  
 // extract data from hyperPad object / behavior
 window.extract = function(data) {
 
