@@ -18,17 +18,19 @@ window.extract = function(data) {
       // read file
       let obj = bplist.parseBuffer(data);
       objmain = obj[0]["$objects"][1]["NS.data"] || obj[0]["$objects"][1];
-      
-      console.debug(objmain);
 
       // fetch data from file
       let actualObj = bplist.parseBuffer(objmain);
       meta = actualObj[0]["$objects"][1]
       
-      console.debug(JSON.stringify(meta));
-      
       // get keys
       let keys = [];
+      
+      if (!meta["NS.keys"]) {
+        console.debug(meta);
+        console.log(JSON.stringify(meta));
+      }
+      
       meta["NS.keys"].forEach(function(dict) {
         keys.push(dict.UID);
       })
