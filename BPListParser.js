@@ -47,6 +47,15 @@ window.extract = function(data) {
       keys.forEach(function(uid) {
         k = actualObj[0]["$objects"][uid];
         let v = actualObj[0]["$objects"][objects[index]];
+        
+        if (k == "outputs") {
+          v = v["NS.objects"];
+          let arr = [];
+          v.forEach(function(value) {
+            arr.push(actualObj[0]["$objects"][value.UID]);
+          })
+          v = arr;
+        }
 
         // nested reference
         try {
