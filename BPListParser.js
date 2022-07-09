@@ -11,7 +11,7 @@ window.parseBuffer = function(data) {
 // extract data from hyperPad object / behavior
 window.extract = function(data) {
 
-  return new Promise(async function(resolve) {
+  //return new Promise(async function(resolve) {
 
     try {
 
@@ -198,15 +198,15 @@ window.extract = function(data) {
       })
 
       // return output
-      resolve(result);
+      return result;
     } catch(e) {
       console.error(e);
-      resolve({
+      return {
         success: false
-      });
+      };
     }
 
-  });
+  //});
 
 }
 }).call(this)}).call(this,{"isBuffer":require("./node_modules/is-buffer/index.js")})
