@@ -3,4 +3,5 @@ The code editor uses native javascript as the primary programming language, so *
 This documentation will review the additional capabilities and functionalities of using code in the editor of a hyperPad project.
 
 # The Behaviors
-### `behaviors.search`
+### `behaviors`
+The object containing all methods to read and write behavior data.
