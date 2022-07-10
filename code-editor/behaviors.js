@@ -1,63 +1,64 @@
-//63//
-const behaviors = {
-  action: undefined,
-  results: [],
+//64//
+function behaviorFunctionHandler() {
+  this.action: undefined;
+  this.results: [];
   
   // search functions
-  search: function() {
+  this.search: function() {
     this.action = "search";
     this.results = [];
     return this;
-  },
-  withName: function() {
+  };
+  this.withName: function() {
     return this;
-  },
-  includesName: function() {
+  };
+  this.includesName: function() {
     return this;
-  },
-  categoryOf: function() {
+  };
+  this.categoryOf: function() {
     return this;
-  },
-  typeOf: function() {
+  };
+  this.typeOf: function() {
     return this;
-  },
-  objectOf: function() {
+  };
+  this.objectOf: function() {
     return this;
-  },
-  isEnabled: function() {
+  };
+  this.isEnabled: function() {
     return this;
-  },
-  isDisabled: function() {
+  };
+  this.isDisabled: function() {
     return this;
-  },
-  includeChildren: function() {
+  };
+  this.includeChildren: function() {
     return this;
-  },
-  withZPK: function() {
+  };
+  this.withZPK: function() {
     return this;
-  },
-  isRoot: function() {
+  };
+  this.isRoot: function() {
     return this;
-  },
-  isNotRoot: function() {
+  };
+  this.isNotRoot: function() {
     return this;
-  },
+  };
   
   // action methods
-  list: function() {
+  this.list: function() {
     return this.behaviors;
-  },
-  copy: function(alias) {
+  };
+  this.copy: function(alias) {
     return false;
-  },
-  enable: function() {
+  };
+  this.enable: function() {
     return false;
-  },
-  disable: function() {
+  };
+  this.disable: function() {
     return false;
-  },
-  destroy: function() {
+  };
+  this.destroy: function() {
     return false;
-  }
+  };
   
 }
+const behaviors = new behaviorFunctionHandler();
