@@ -1,14 +1,9 @@
-//64//
+//68//
 function behaviorFunctionHandler() {
   this.action = undefined;
   this.results = [];
   
   // search functions
-  this.search = function() {
-    this.action = "search";
-    this.results = [];
-    return this;
-  };
   this.withName = function() {
     return this;
   };
@@ -61,4 +56,13 @@ function behaviorFunctionHandler() {
   };
   
 }
+
+behaviorFunctionHandler.prototype = {
+  get search() {
+    this.results = [];
+    this.action = "search";
+    return this;
+  }
+};
+
 const behaviors = new behaviorFunctionHandler();
