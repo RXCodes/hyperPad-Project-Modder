@@ -4,18 +4,18 @@ This documentation will review the additional capabilities and functionalities o
 
 # The Behaviors
 __behaviors__ **{OBJECT}** A global object containing all methods to read and write behavior data.<br>
-*Usage Example:* 
+*Usage Example:* <br>
 `behaviors.search.withName("Empty-1");`
 
 __hyperPadBehavior__ **(CLASS)** An instance representing a behavior in the project.<br>
-*Usage Example:* 
+*Usage Example:* <br>
 `behavior.moveToObject("Empty-1");` 
 
 # The Objects
 __objects__ **{OBJECT}** A global object containing all methods to read and write object data.<br>
-*Usage Example:* 
+*Usage Example:* <br>
 `objects.createEmpty({x: 50, y: 100, name: "Example", width: 50, height: 50, useMeters: true});`
 
 __hyperPadObject__ **(CLASS)** An instance of an object in the project.<br>
-*Usage Example:* 
+*Usage Example:* <br>
 `object.moveBy(0, 10);`
