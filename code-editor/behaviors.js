@@ -1,77 +1,77 @@
 const behaviors = {
   action: undefined,
   search: function() {
-    let self = this;
-    self.action = "search";
-    self.behaviors = [];
-    returns self;
+    let result = this;
+    result.action = "search";
+    result.behaviors = [];
+    returns result;
   },
   
   // search functions
   withName: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   includesName: function() {
-    let self = self;
-    returns self;
+    let result = this;
+    returns result;
   },
   categoryOf: function() {
-    let self = self;
-    returns self;
+    let result = this;
+    returns result;
   },
   typeOf: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   objectOf: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   isEnabled: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   isDisabled: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   includeChildren: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   withZPK: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   isRoot: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   isNotRoot: function() {
-    let self = this;
-    returns self;
+    let result = this;
+    returns result;
   },
   
   // action methods
   list: function() {
-    let self = this;
-    returns self.behaviors;
+    let result = this;
+    returns result.behaviors;
   },
   copy: function(alias) {
-    let self = this;
+    let result = this;
     returns false;
   },
   enable: function() {
-    let self = this;
+    let result = this;
     returns false;
   },
   disable: function() {
-    let self = this;
+    let result = this;
     returns false;
   },
   destroy: function() {
-    let self = this;
+    let result = this;
     returns false;
   }
   
