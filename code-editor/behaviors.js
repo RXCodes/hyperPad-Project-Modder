@@ -1,17 +1,14 @@
 //99//
-var _initBehaviors = {};
-var _initObjects = {};
-
 // load data
 const onmessage = function(e) {
   let data = e.data;
   console.log(data);
   if (data[0] == "loadBehaviors") {
-    _initBehaviors = data[1];
+    self._initBehaviors = data[1];
     console.log(data[1]);
   }
   if (data[1] == "loadObjects") {
-    _initObjects = data[2];
+    self._initObjects = data[2];
   }
 }
 
