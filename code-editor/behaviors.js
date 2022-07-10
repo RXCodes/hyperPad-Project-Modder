@@ -40,19 +40,19 @@ function behaviorFunctionHandler() {
   
   // action methods
   this.list = function() {
-    return this.results;
+    return "Does not work yet!";
   };
   this.copy = function(alias) {
-    return false;
+    return "Does not work yet!";
   };
   this.enable = function() {
-    return false;
+    return "Does not work yet!";
   };
   this.disable = function() {
-    return false;
+    return "Does not work yet!";
   };
   this.destroy = function() {
-    return false;
+    return "Does not work yet!";
   };
   
 }
