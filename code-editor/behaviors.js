@@ -1,10 +1,11 @@
-//97//
+//98//
 var _initBehaviors = {};
 var _initObjects = {};
 
 // load data
 const onmessage = function(e) {
   let data = e.data;
+  console.log(data);
   if (data[0] == "loadBehaviors") {
     _initBehaviors = data[1];
     console.log(data[1]);
