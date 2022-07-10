@@ -51,5 +51,5 @@ This documentation will review the additional capabilities and functionalities o
   `console.log(behaviors.includesName("fart").objectOf("Bad").list());`
 
   Copy and paste a behavior tree from one object to another.<br>
-  `behaviors.withName("Behavior Bundle3").includeChildren().copy("myTree"); <br>
-  behaviors.paste("Empty-2", "myTree");`
+  `behaviors.withName("Behavior Bundle3").includeChildren().copy("myTree");` <br>
+  `behaviors.paste("Empty-2", "myTree");`
