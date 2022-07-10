@@ -1,62 +1,62 @@
 //64//
 function behaviorFunctionHandler() {
-  this.action: undefined;
-  this.results: [];
+  this.action = undefined;
+  this.results = [];
   
   // search functions
-  this.search: function() {
+  this.search = function() {
     this.action = "search";
     this.results = [];
     return this;
   };
-  this.withName: function() {
+  this.withName = function() {
     return this;
   };
-  this.includesName: function() {
+  this.includesName = function() {
     return this;
   };
-  this.categoryOf: function() {
+  this.categoryOf = function() {
     return this;
   };
-  this.typeOf: function() {
+  this.typeOf = function() {
     return this;
   };
-  this.objectOf: function() {
+  this.objectOf = function() {
     return this;
   };
-  this.isEnabled: function() {
+  this.isEnabled = function() {
     return this;
   };
-  this.isDisabled: function() {
+  this.isDisabled = function() {
     return this;
   };
-  this.includeChildren: function() {
+  this.includeChildren = function() {
     return this;
   };
-  this.withZPK: function() {
+  this.withZPK = function() {
     return this;
   };
-  this.isRoot: function() {
+  this.isRoot = function() {
     return this;
   };
-  this.isNotRoot: function() {
+  this.isNotRoot = function() {
     return this;
   };
   
   // action methods
-  this.list: function() {
+  this.list = function() {
     return this.behaviors;
   };
-  this.copy: function(alias) {
+  this.copy = function(alias) {
     return false;
   };
-  this.enable: function() {
+  this.enable = function() {
     return false;
   };
-  this.disable: function() {
+  this.disable = function() {
     return false;
   };
-  this.destroy: function() {
+  this.destroy = function() {
     return false;
   };
   
