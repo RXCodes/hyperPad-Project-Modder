@@ -40,7 +40,7 @@ function behaviorFunctionHandler() {
   
   // action methods
   this.list = function() {
-    return this.behaviors;
+    return this.results;
   };
   this.copy = function(alias) {
     return false;
