@@ -1,5 +1,11 @@
 //99//
 // load data
+if (!self._initBehaviors) {
+  self._initBehaviors = {};
+}
+if (!self._initObjects) {
+  self._initObjects = {};
+}
 const onmessage = function(e) {
   let data = e.data;
   console.log(data);
