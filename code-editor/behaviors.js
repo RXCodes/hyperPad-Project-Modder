@@ -1,6 +1,6 @@
 //97//
-var _initBehaviors = [];
-var _initObjects = [];
+var _initBehaviors = {};
+var _initObjects = {};
 
 // load data
 const onmessage = function(e) {
