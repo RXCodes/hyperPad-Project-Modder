@@ -1,4 +1,4 @@
-//68//
+//83//
 function behaviorFunctionHandler() {
   this.action = undefined;
   this.results = [];
@@ -37,6 +37,9 @@ function behaviorFunctionHandler() {
   this.isNotRoot = function() {
     return this;
   };
+  this.global = function() {
+    return this;
+  };
   
   // action methods
   this.list = function() {
@@ -52,6 +55,18 @@ function behaviorFunctionHandler() {
     return "Does not work yet!";
   };
   this.destroy = function() {
+    return "Does not work yet!";
+  };
+  this.listInternal = function() {
+    return "Does not work yet!";
+  };
+  this.setInput = function() {
+    return "Does not work yet!";
+  };
+  this.secureInput = function() {
+    return "Does not work yet!";
+  };
+  this.secureALlInputs = function() {
     return "Does not work yet!";
   };
   
