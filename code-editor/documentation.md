@@ -25,7 +25,16 @@ This documentation will review the additional capabilities and functionalities o
   - `.disable()`: Disables the behaviors in the result.
   - `.destroy()`: Deletes the behaviors in the result.
 
-  **Examples** <br>
+- `.copy(objectName, alias)`: Copies all of an object's behaviors to a specified alias. Returns true if successful.
+  - `objectName` **"STRING"** - The name of the object to copy behaviors from.
+  - `alias` **"STRING"** - The alias to save the behaviors to - The alias is like the storage location of the behavior.
+
+- `.paste(objectName, alias)`: Pastes behaviors copied to an alias in an object. Returns true if successful.
+  - `objectName` **"STRING"** - The name of the object to paste behaviors in.
+  - `alias` **"STRING"** - The alias to load the behaviors from - Use the same alias to load the same behaviors.
+
+# Example Code
+ **Manipulating Behaviors** <br>
   Get all behaviors in an object named "Empty-1" and destroy them.<br>
   - `behaviors.objectOf("Empty-1").destroy();`<br>
    
@@ -40,12 +49,3 @@ This documentation will review the additional capabilities and functionalities o
   
   Get all behaviors containing "fart" in their name in an object called "Bad" and show it in the console log.<br>
   - `console.log(behaviors.includesName("fart").objectOf("Bad").list());`<br>
-
-- `.copy(objectName, alias)`: Copies all of an object's behaviors to a specified alias. Returns true if successful.
-  - `objectName` **"STRING"** - The name of the object to copy behaviors from.
-  - `alias` **"STRING"** - The alias to save the behaviors to - The alias is like the storage location of the behavior.
-
-- `.paste(objectName, alias)`: Pastes behaviors copied to an alias in an object. Returns true if successful.
-  - `objectName` **"STRING"** - The name of the object to paste behaviors in.
-  - `alias` **"STRING"** - The alias to load the behaviors from - Use the same alias to load the same behaviors.
-
