@@ -4,75 +4,75 @@ const behaviors = {
     let result = this;
     result.action = "search";
     result.behaviors = [];
-    returns result;
+    return result;
   },
   
   // search functions
   withName: function() {
     let result = this;
-    returns result;
+    return result;
   },
   includesName: function() {
     let result = this;
-    returns result;
+    return result;
   },
   categoryOf: function() {
     let result = this;
-    returns result;
+    return result;
   },
   typeOf: function() {
     let result = this;
-    returns result;
+    return result;
   },
   objectOf: function() {
     let result = this;
-    returns result;
+    return result;
   },
   isEnabled: function() {
     let result = this;
-    returns result;
+    return result;
   },
   isDisabled: function() {
     let result = this;
-    returns result;
+    return result;
   },
   includeChildren: function() {
     let result = this;
-    returns result;
+    return result;
   },
   withZPK: function() {
     let result = this;
-    returns result;
+    return result;
   },
   isRoot: function() {
     let result = this;
-    returns result;
+    return result;
   },
   isNotRoot: function() {
     let result = this;
-    returns result;
+    return result;
   },
   
   // action methods
   list: function() {
     let result = this;
-    returns result.behaviors;
+    return result.behaviors;
   },
   copy: function(alias) {
     let result = this;
-    returns false;
+    return false;
   },
   enable: function() {
     let result = this;
-    returns false;
+    return false;
   },
   disable: function() {
     let result = this;
-    returns false;
+    return false;
   },
   destroy: function() {
     let result = this;
-    returns false;
+    return false;
   }
   
 }
