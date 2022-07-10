@@ -1,5 +1,19 @@
 //83//
-function behaviorFunctionHandler() {
+var _initBehaviors = [];
+var _initObjects = [];
+
+// load data
+const onmessage = function(e) {
+  let data = e.data;
+  if (data[0] == "loadBehaviors") {
+    _initBehaviors = data[1];
+  }
+  if (data[1] == "loadObjects") {
+    _initObjects = data[2];
+  }
+}
+
+function _behaviorFunctionHandler() {
   this.action = undefined;
   this.results = [];
   
@@ -72,12 +86,12 @@ function behaviorFunctionHandler() {
   
 }
 
-behaviorFunctionHandler.prototype = {
+_behaviorFunctionHandler.prototype = {
   get search() {
-    this.results = [];
+    this.results = _initBehaviors;
     this.action = "search";
     return this;
   }
 };
 
-const behaviors = new behaviorFunctionHandler();
+const behaviors = new _behaviorFunctionHandler();
