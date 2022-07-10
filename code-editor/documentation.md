@@ -26,15 +26,15 @@ This documentation will review the additional capabilities and functionalities o
   - `.destroy()`: Deletes the behaviors in the result.
 
   **Examples**
-  Get all behaviors in an object named "Empty-1" and destroy them.
+  Get all behaviors in an object named "Empty-1" and destroy them.<br>
   - `behaviors.objectOf("Empty-1").destroy();`
-  Get all behaviors in the Custom category in the project and console log them.
+  Get all behaviors in the Custom category in the project and console log them.<br>
   - `console.log(behaviors.categoryOf("Custom").list());`
-  Get all Started Touching behaviors in an object named "Button" and disable them.
+  Get all Started Touching behaviors in an object named "Button" and disable them.<br>
   - `behaviors.typeOf("Started Touching").objectOf("Button").disable();`
-  Get the entire behavior tree under "Receive Message5" and destroy them including the parent.
+  Get the entire behavior tree under "Receive Message5" and destroy them including the parent.<br>
   - `behaviors.withName("Receive Message5").includeChildren().destroy();`
-  Get all behaviors containing "fart" in their name in an object called "Bad" and show it in the console log.
+  Get all behaviors containing "fart" in their name in an object called "Bad" and show it in the console log.<br>
   - `console.log(behaviors.includesName("fart").objectOf("Bad").list());`
 
 - `.copy(objectName, alias)`: Copies all of an object's behaviors to a specified alias. Returns true if successful.
@@ -45,5 +45,3 @@ This documentation will review the additional capabilities and functionalities o
   - `objectName` **"STRING"** - The name of the object to paste behaviors in.
   - `alias` **"STRING"** - The alias to load the behaviors from - Use the same alias to load the same behaviors.
 
-- `.get(behaviorName)`: Gets a behavior by name and returns a behavior instance. Returns a blank dictionary if the behavior does not exist.
-  - `behaviorName` **"STRING"** - The name of the behavior to fetch.
