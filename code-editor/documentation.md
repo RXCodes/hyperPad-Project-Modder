@@ -25,7 +25,7 @@ This documentation will review the additional capabilities and functionalities o
   - `.disable()`: Disables the behaviors in the result.
   - `.destroy()`: Deletes the behaviors in the result.
 
-  **Examples**
+  **Examples** <br>
   Get all behaviors in an object named "Empty-1" and destroy them.<br>
   - `behaviors.objectOf("Empty-1").destroy();`
   Get all behaviors in the Custom category in the project and console log them.<br>
