@@ -3,23 +3,12 @@ The code editor uses native javascript as the primary programming language, so *
 This documentation will review the additional capabilities and functionalities of using code in the editor of a hyperPad project.
 
 # The Behaviors
-var behaviors **{OBJECT}**<br>
-A global object containing all methods to read and write behavior data.<br>
-*Usage Example:* <br>
-`behaviors.search.withName("Empty-1");`
-
-class hyperPadBehavior **(CLASS)**<br>
-An instance representing a behavior in the project.<br>
-*Usage Example:* <br>
-`behavior.moveToObject("Empty-1");` 
-
-# The Objects
-var objects **{OBJECT}**<br>
-A global object containing all methods to read and write object data.<br>
-*Usage Example:* <br>
-`objects.createEmpty({x: 50, y: 100, name: "Example", width: 50, height: 50, useMeters: true});`
-
-class hyperPadObject **(CLASS)**<br>
-An instance of an object in the project.<br>
-*Usage Example:* <br>
-`object.moveBy(0, 10);`
+`behaviors` **{Object}**
+- `.search`: Searches for behaviors to execute tasks on.
+- `.copy(objectName, alias)`: Copies all of an object's behaviors to a specified alias.
+  - `objectName` **STRING** - The name of the object to copy behaviors from.
+  - `alias` **STRING** - The alias to save the behaviors to - The alias is like the storage location of the behavior.
+- `.paste(objectName, alias)`: Pastes behaviors copied to an alias in an object.
+  - `objectName` **STRING** - The name of the object to paste behaviors in.
+  - `alias` **STRING** - The alias to load the behaviors from - Use the same alias to load the same behaviors.
+- `.create`: Creates a behavior using properties provided.
