@@ -7,6 +7,7 @@ const onmessage = function(e) {
   let data = e.data;
   if (data[0] == "loadBehaviors") {
     _initBehaviors = data[1];
+    console.log(data[1]);
   }
   if (data[1] == "loadObjects") {
     _initObjects = data[2];
