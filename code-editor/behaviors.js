@@ -1,77 +1,61 @@
 const behaviors = {
   action: undefined,
-  search: function() {
-    let result = this;
-    result.action = "search";
-    result.behaviors = [];
-    return result;
-  },
   
   // search functions
-  withName: function() {
+  search: function() {
     let result = this;
-    return result;
+    this.action = "search";
+    this.behaviors = [];
+    return this;
+  },
+  withName: function() {
+    return this;
   },
   includesName: function() {
-    let result = this;
-    return result;
+    return this;
   },
   categoryOf: function() {
-    let result = this;
-    return result;
+    return this;
   },
   typeOf: function() {
-    let result = this;
-    return result;
+    return this;
   },
   objectOf: function() {
-    let result = this;
-    return result;
+    return this;
   },
   isEnabled: function() {
-    let result = this;
-    return result;
+    return this;
   },
   isDisabled: function() {
-    let result = this;
-    return result;
+    return this;
   },
   includeChildren: function() {
-    let result = this;
-    return result;
+    return this;
   },
   withZPK: function() {
-    let result = this;
-    return result;
+    return this;
   },
   isRoot: function() {
-    let result = this;
-    return result;
+    return this;
   },
   isNotRoot: function() {
-    let result = this;
-    return result;
+    return this;
   },
   
   // action methods
   list: function() {
-    let result = this;
-    return result.behaviors;
+    return this.behaviors;
   },
   copy: function(alias) {
-    let result = this;
     return false;
   },
   enable: function() {
-    let result = this;
     return false;
   },
   disable: function() {
-    let result = this;
     return false;
   },
   destroy: function() {
-    let result = this;
     return false;
   }
   
