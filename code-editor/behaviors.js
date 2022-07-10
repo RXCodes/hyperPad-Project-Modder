@@ -3,7 +3,6 @@ const behaviors = {
   
   // search functions
   search: function() {
-    let result = this;
     this.action = "search";
     this.behaviors = [];
     return this;
