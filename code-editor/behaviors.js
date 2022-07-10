@@ -3,6 +3,7 @@ const behaviors = {
   search: function() {
     let self = this;
     self.action = "search";
+    self.behaviors = [];
     returns self;
   },
   
@@ -55,7 +56,7 @@ const behaviors = {
   // action methods
   list: function() {
     let self = this;
-    returns [];
+    returns self.behaviors;
   },
   copy: function(alias) {
     let self = this;
