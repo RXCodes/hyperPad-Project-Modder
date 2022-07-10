@@ -36,16 +36,20 @@ This documentation will review the additional capabilities and functionalities o
 # Example Code
  **Manipulating Behaviors** <br>
   Get all behaviors in an object named "Empty-1" and destroy them.<br>
-  - `behaviors.objectOf("Empty-1").destroy();`<br>
+  `behaviors.objectOf("Empty-1").destroy();`
    
   Get all behaviors in the Custom category in the project and console log them.<br>
-  - `console.log(behaviors.categoryOf("Custom").list());`<br>
+  `console.log(behaviors.categoryOf("Custom").list());`
   
   Get all Started Touching behaviors in an object named "Button" and disable them.<br>
-  - `behaviors.typeOf("Started Touching").objectOf("Button").disable();`<br>
-   
+  `behaviors.typeOf("Started Touching").objectOf("Button").disable();`
+  
   Get the entire behavior tree under "Receive Message5" and destroy them including the parent.<br>
-  - `behaviors.withName("Receive Message5").includeChildren().destroy();`<br>
+  `behaviors.withName("Receive Message5").includeChildren().destroy();`
   
   Get all behaviors containing "fart" in their name in an object called "Bad" and show it in the console log.<br>
-  - `console.log(behaviors.includesName("fart").objectOf("Bad").list());`<br>
+  `console.log(behaviors.includesName("fart").objectOf("Bad").list());`
+
+  Copy and paste a behavior tree from one object to another.<br>
+  `behaviors.withName("Behavior Bundle3").includeChildren().copy("myTree");
+  behaviors.paste("Empty-2", "myTree");`
