@@ -1,10 +1,12 @@
+//63
 const behaviors = {
   action: undefined,
+  results: [],
   
   // search functions
   search: function() {
     this.action = "search";
-    this.behaviors = [];
+    this.results = [];
     return this;
   },
   withName: function() {
