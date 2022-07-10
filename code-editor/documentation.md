@@ -27,15 +27,15 @@ This documentation will review the additional capabilities and functionalities o
 
   **Examples** <br>
   Get all behaviors in an object named "Empty-1" and destroy them.<br>
-  - `behaviors.objectOf("Empty-1").destroy();`
+  - `behaviors.objectOf("Empty-1").destroy();`<br>
   Get all behaviors in the Custom category in the project and console log them.<br>
-  - `console.log(behaviors.categoryOf("Custom").list());`
+  - `console.log(behaviors.categoryOf("Custom").list());`<br>
   Get all Started Touching behaviors in an object named "Button" and disable them.<br>
-  - `behaviors.typeOf("Started Touching").objectOf("Button").disable();`
+  - `behaviors.typeOf("Started Touching").objectOf("Button").disable();`<br>
   Get the entire behavior tree under "Receive Message5" and destroy them including the parent.<br>
-  - `behaviors.withName("Receive Message5").includeChildren().destroy();`
+  - `behaviors.withName("Receive Message5").includeChildren().destroy();`<br>
   Get all behaviors containing "fart" in their name in an object called "Bad" and show it in the console log.<br>
-  - `console.log(behaviors.includesName("fart").objectOf("Bad").list());`
+  - `console.log(behaviors.includesName("fart").objectOf("Bad").list());`<br>
 
 - `.copy(objectName, alias)`: Copies all of an object's behaviors to a specified alias. Returns true if successful.
   - `objectName` **"STRING"** - The name of the object to copy behaviors from.
