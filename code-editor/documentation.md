@@ -20,6 +20,9 @@ This documentation will review the additional capabilities and functionalities o
 
   **Action Methods**
   - `.list()`: Returns an array of behavior names of the result.
+  - `.listInternal()`: Returns an dictionary of behavior names with their corresponding internal data as the value.
+  - `.log()`: Logs the behavior names of the result to the console.
+  - `.logInternal()`: Logs the behaviors' internal data to the console.
   - `.copy(alias)`: Copies behaviors from the result to an alias.
   - `.enable()`: Enables the behaviors in the result.
   - `.disable()`: Disables the behaviors in the result.
