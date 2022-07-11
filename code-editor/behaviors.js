@@ -1,23 +1,4 @@
-//103//
-// load data
-if (!self._initBehaviors) {
-  self._initBehaviors = {};
-}
-if (!self._initObjects) {
-  self._initObjects = {};
-}
-const onmessage = function(e) {
-  let data = e.data;
-  console.log(data);
-  if (data[0] == "loadBehaviors") {
-    self._initBehaviors = data[1];
-    console.log(data[1]);
-  }
-  if (data[1] == "loadObjects") {
-    self._initObjects = data[2];
-  }
-}
-
+//83//
 function _behaviorFunctionHandler() {
   this.action = undefined;
   this.results = [];
@@ -93,7 +74,7 @@ function _behaviorFunctionHandler() {
 
 _behaviorFunctionHandler.prototype = {
   get search() {
-    this.results = _initBehaviors;
+    this.results = self._initBehaviors;
     this.action = "search";
     return this;
   }
