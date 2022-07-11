@@ -11,32 +11,32 @@ function _behaviorFunctionHandler() {
     Object.keys(self.results).forEach(function(behavior) {
       if (behavior !== name) {
         delete self.results[behavior];
-      };
+      }
     });
     return this;
   };
   this.includesName = function(name) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     let self = this;
     Object.keys(self.results).forEach(function(behavior) {
       if (!behavior.includes(name)) {
         delete self.results[behavior];
-      };
+      }
     });
     return this;
   };
   this.categoryOf = function(category) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     let self = this;
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
       if (data.ZACTIONS.behaviourCategory !== category) {
         delete self.results[behavior];
-      };
+      }
     });
     return this;
   };
@@ -49,7 +49,7 @@ function _behaviorFunctionHandler() {
       let data = self.results[behavior];
       if (data.ZNAME !== type) {
         delete self.results[behavior];
-      };
+      }
     });
     return this;
   };
@@ -115,7 +115,7 @@ function _behaviorFunctionHandler() {
   this.enable = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     return "Does not work yet!";
   };
   this.disable = function() {
@@ -123,35 +123,35 @@ function _behaviorFunctionHandler() {
       throw "Invalid usage - must use '.search' beforehand.";
     };
     return "Does not work yet!";
-  };
+  }
   this.destroy = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     return "Does not work yet!";
   };
   this.listInternal = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     return this.results;
   };
   this.setInput = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     return "Does not work yet!";
   };
   this.secureInput = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     return "Does not work yet!";
   };
   this.secureAllInputs = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
-    };
+    }
     return "Does not work yet!";
   };
   
