@@ -1,9 +1,8 @@
-//83//
+
 function _behaviorFunctionHandler() {
   this.action = undefined;
   this.results = [];
-  
-  // search functions
+ 
   this.withName = function() {
     return this;
   };
@@ -41,7 +40,6 @@ function _behaviorFunctionHandler() {
     return this;
   };
   
-  // action methods
   this.list = function() {
     return "Does not work yet!";
   };
