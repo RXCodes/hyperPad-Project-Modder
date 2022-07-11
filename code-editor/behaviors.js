@@ -154,6 +154,22 @@ function _behaviorFunctionHandler() {
     }
     return "Does not work yet!";
   };
+  this.log = function(seperator) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let list = Object.keys(this.results);
+    console.log(JSON.stringify(list, null, seperator || "  "));
+    return this;
+  };
+  this.logInternal = function(seperator) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let list = this.results;
+    console.log(JSON.stringify(list, null, seperator || "  "));
+    return this;
+  };
   
 }
 
