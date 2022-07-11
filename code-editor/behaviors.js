@@ -210,7 +210,7 @@ function _behaviorFunctionHandler() {
 
 _behaviorFunctionHandler.prototype = {
   get search() {
-    this.results = self._initBehaviors;
+    this.results = JSON.parse(JSON.stringify(self._initBehaviors));
     this.action = "search";
     return this;
   }
