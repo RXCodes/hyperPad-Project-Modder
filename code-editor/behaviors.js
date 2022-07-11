@@ -63,12 +63,26 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (!data.ZACTIONS.active) {
+        delete self.results[behavior];
+      }
+    });
     return this;
   };
   this.isDisabled = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (data.ZACTIONS.active) {
+        delete self.results[behavior];
+      }
+    });
     return this;
   };
   this.includeChildren = function() {
@@ -77,22 +91,43 @@ function _behaviorFunctionHandler() {
     };
     return this;
   };
-  this.withZPK = function() {
+  this.withZPK = function(zpk) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (data.ZPK !== zpk) {
+        delete self.results[behavior];
+      }
+    });
     return this;
   };
   this.isRoot = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (!data.ZISROOT) {
+        delete self.results[behavior];
+      }
+    });
     return this;
   };
   this.isNotRoot = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (data.ZISROOT) {
+        delete self.results[behavior];
+      }
+    });
     return this;
   };
   this.global = function() {
