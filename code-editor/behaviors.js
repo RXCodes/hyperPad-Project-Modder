@@ -162,7 +162,7 @@ _behaviorFunctionHandler.prototype = {
     this.results = self._initBehaviors;
     this.action = "search";
     return this;
-  };
+  }
 };
 
 const behaviors = new _behaviorFunctionHandler();
