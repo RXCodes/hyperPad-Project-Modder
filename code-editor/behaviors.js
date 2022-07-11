@@ -66,7 +66,7 @@ function _behaviorFunctionHandler() {
   this.secureInput = function() {
     return "Does not work yet!";
   };
-  this.secureALlInputs = function() {
+  this.secureAllInputs = function() {
     return "Does not work yet!";
   };
   
