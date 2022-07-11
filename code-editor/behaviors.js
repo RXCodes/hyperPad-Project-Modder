@@ -98,6 +98,9 @@ function _behaviorFunctionHandler() {
         return;
       }
       iterated[ztag] = true;
+      if (!ztags[ztag]) {
+        return;
+      }
       let behavior = ztags[ztag].ZACTIONS.alias;
       self.results[behavior] = ztags[ztag];
       let data = self.results[behavior];
