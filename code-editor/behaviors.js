@@ -89,6 +89,28 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
+    let ztags = this.ztags;
+    let iterated = {};
+    
+    function check(ztag) {
+      if (iterated[ztag]) {
+        return;
+      }
+      iterated[ztag] = true;
+      let behavior = ztags[ztag].ZACTIONS.alias;
+      self.results[behavior] = ztags[ztag];
+      let data = self.results[behavior];
+      let outputs = data.ZACTIONS.outputs || [];
+      outputs.forEach(function(ztag) {
+        check(ztag);
+      });
+    }
+    
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      check(behavior.ZTAG);
+    });
     return this;
   };
   this.withZPK = function(zpk) {
@@ -211,6 +233,16 @@ function _behaviorFunctionHandler() {
 _behaviorFunctionHandler.prototype = {
   get search() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    if (!this.ztagInit) {
+      this.ztagInit = true;
+      let ztags = {};
+      let behaviors = this.results;
+      Object.keys(behaviors).forEach(function(key) {
+        let data = behaviors[key];
+        ztags[data.ZTAG] = data;
+      });
+      this.ztags = ztags;
+    }
     this.action = "search";
     return this;
   }
