@@ -165,4 +165,12 @@ _behaviorFunctionHandler.prototype = {
   }
 };
 
+Object.prototype.format = function(seperator) {
+  return JSON.stringify(this, null, seperator || "  ");
+};
+
+Array.prototype.format = function(seperator) {
+  return JSON.stringify(this, null, seperator || "  ");
+};
+
 const behaviors = new _behaviorFunctionHandler();
