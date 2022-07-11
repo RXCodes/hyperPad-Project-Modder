@@ -106,7 +106,7 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
-    let result = Object.keys(this.results));
+    let result = Object.keys(this.results);
     return result;
   };
   this.copy = function(alias) {
