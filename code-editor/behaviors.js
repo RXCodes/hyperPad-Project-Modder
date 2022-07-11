@@ -112,7 +112,7 @@ function _behaviorFunctionHandler() {
     
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
-      check(behavior.ZTAG);
+      check(data.ZTAG);
     });
     return this;
   };
