@@ -33,6 +33,8 @@ Example Usage: **behaviors.search.objectOf("Empty-1").isRoot().log();**
     - `zpkNumber` **(NUMBER)** - A unique integer that all behaviors have. *(5, 24, 20, etc.)*
   - `.isRoot()`: Limits results to behaviors that are not connected from the top. These behaviors execute on start.
   - `.isNotRoot()`: Limits results to behaviors that are connected from the top.
+  - `.isGlobal()`: Limits results to global behaviors that are in the world object.
+  - `.isNotGlobal()`: Limits results to behaviors that are not in the world object.
 
   **Action Methods**: Execute operations on the behaviors from the resulting search.
   - `.list()`: Returns an array of behavior names of the result.
