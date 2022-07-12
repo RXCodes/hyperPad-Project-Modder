@@ -301,6 +301,7 @@ _behaviorFunctionHandler.prototype = {
         let data = objs[name];
         objectZPKs[data.ZPK] = data;
       });
+      this.objectZPKs = objectZPKs;
       
     }
     this.action = "search";
