@@ -251,6 +251,13 @@ function _behaviorFunctionHandler() {
     let result = Object.keys(this.results);
     return result;
   };
+  this.count = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    };
+    let result = Object.keys(this.results).length;
+    return result;
+  };
   this.copy = function(alias) {
     return "Does not work yet!";
   };
@@ -347,6 +354,42 @@ function _behaviorFunctionHandler() {
     return "Does not work yet!";
   };
   this.secureAllInputs = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.hide = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.show = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.setType = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.moveBy = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.moveToPoint = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.moveToObject = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
