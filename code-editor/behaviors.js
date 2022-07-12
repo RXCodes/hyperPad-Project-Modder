@@ -410,12 +410,30 @@ function _behaviorFunctionHandler() {
   // copy and pasting from object
   this.clipboards = {};
   this.currentClipboard = {};
-  this.in = function(objectName, alias) {
-    if (this.action !== "copy" && this.action !== "paste") {
-      throw "Invalid usage - must use '.copy' or '.paste' beforehand.";
-    }
+  this.clipboard = {};
+  this.clipboard.clear = function() {
+    this.clipboards = {};
+  };
+  this.clipboards.list = function() {
+    return Object.keys(this.clipboards);
+  }
+  this.clipboards.listInternal = function() {
+    return this.clipboards;
+  }
+  this.clipboards.log = function() {
+    return console.log(JSON.stringify(Object.keys(this.clipboards), null, "  "));
+  }
+  this.clipboards.logInternal = function() {
+    return console.log(JSON.stringify(this.clipboards, null, "  "));
+  }
+  this.clipboards.remove = function(alias) {
+    delete this.clipboards[alias];
+    console.log("Removed " + alias.trim() + " from clipboard.");
+    return this;
+  };
+  this.clipboard.copy = function(objectName, alias) {
     let startTime = Date.now();
-    if (this.action == "copy") {
+    if (true) {
       if (!alias) {
         console.error("Copy failed: Alias is not defined!");
         return this;
@@ -438,7 +456,9 @@ function _behaviorFunctionHandler() {
       let deltaTime = Date.now() - startTime;
       console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     }
-    if (this.paste == "paste") {
+  };
+  this.clipboard.copy = function(objectName, alias) {
+    if (true) {
       this.action = "pasteActions";
       if (!alias) {
         console.error("Paste failed: Alias is not defined!");
@@ -499,18 +519,6 @@ _behaviorFunctionHandler.prototype = {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
     this.init();
     this.action = "search";
-    return this;
-  },
-  
-  get copy() {
-    this.action = "copy";
-    this.init();
-    return this;
-  },
-
-  get paste() {
-    this.action = "paste";
-    this.init();
     return this;
   }
   
