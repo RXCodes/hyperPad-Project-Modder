@@ -362,7 +362,7 @@ function _behaviorFunctionHandler() {
   Object.keys(mods).forEach(function(mod) {
     behaviorsMain[mod] = function(...args) {
       if (!mods[mod].includes(this.action)) {
-        return console.error("Invalid syntax: " + mod);
+        return console.error("Invalid usage: " + mod);
       }
       postMessage("command", this.action, mod, args);
       return this;
