@@ -441,7 +441,7 @@ function _behaviorFunctionHandler() {
     }
     this.action = "copyActions";
     this.results = JSON.parse(JSON.stringify(_initBehaviors));
-    if (!_initObjects[objectName])  
+    if (!_initObjects[objectName]) {
       return console.error("Copy failed: Object " + JSON.stringify(objectName) + " does not exist!");
     }
     let zpks = self.objectZPKs;
