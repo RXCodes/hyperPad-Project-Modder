@@ -27,6 +27,18 @@ function _behaviorFunctionHandler() {
     });
     return this;
   };
+  this.notIncludeName = function(name) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      if (behavior.includes(name)) {
+        delete self.results[behavior];
+      }
+    });
+    return this;
+  };
   this.categoryOf = function(category) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
@@ -243,6 +255,62 @@ function _behaviorFunctionHandler() {
       throw "Invalid usage - must use '.search' beforehand.";
     }
     return this.results;
+  };
+  this.getInputNames = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let outputs = {};
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      Object.keys(data.ZACTIONS).function(field) {
+        let inputData = data.ZACTIONS[field] || {};
+        if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
+          outputs[field] = inputData;
+        }
+      })
+    });
+    return Object.keys(outputs);
+  };
+  this.getInputs = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let outputs = {};
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      Object.keys(data.ZACTIONS).function(field) {
+        let inputData = data.ZACTIONS[field] || {};
+        if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
+          outputs[field] = inputData;
+        }
+      })
+    });
+    return outputs;
+  };
+  this.getInput = function(input) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let outputs = [];
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      let inputData = data.ZACTIONS[input] || {};
+      if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
+        outputs.push(inputData);
+      }
+    });
+    if (outputs.length = 0) {
+      return {};
+    }
+    if (outputs.length == 1) {
+      return outputs[0];
+    } else {
+      return outputs;
+    }
   };
   this.setInput = function() {
     if (this.action !== "search") {
