@@ -414,25 +414,26 @@ function _behaviorFunctionHandler() {
   this.clipboard.clear = function() {
     this.clipboards = {};
   };
-  this.clipboards.list = function() {
+  this.clipboard.list = function() {
     return Object.keys(this.clipboards);
   }
-  this.clipboards.listInternal = function() {
+  this.clipboard.listInternal = function() {
     return this.clipboards;
   }
-  this.clipboards.log = function() {
+  this.clipboard.log = function() {
     return console.log(JSON.stringify(Object.keys(this.clipboards), null, "  "));
   }
-  this.clipboards.logInternal = function() {
+  this.clipboard.logInternal = function() {
     return console.log(JSON.stringify(this.clipboards, null, "  "));
   }
-  this.clipboards.remove = function(alias) {
+  this.clipboard.remove = function(alias) {
     delete this.clipboards[alias];
     console.log("Removed " + alias.trim() + " from clipboard.");
     return this;
   };
   this.clipboard.copy = function(objectName, alias) {
     let startTime = Date.now();
+    let self = this;
     if (true) {
       if (!alias) {
         console.error("Copy failed: Alias is not defined!");
@@ -440,7 +441,6 @@ function _behaviorFunctionHandler() {
       }
       this.action = "copyActions";
       this.results = JSON.parse(JSON.stringify(self._initBehaviors));
-      let self = this;
       if (!self._initObjects[objectName]) {
         return console.error("Copy failed: Object " + JSON.stringify(objectName) + " does not exist!");
       }
@@ -451,24 +451,26 @@ function _behaviorFunctionHandler() {
           delete self.results[behavior];
         }
       });
-      this.clipboards[alias] = self.results;
-      this.currentClipboard = self.results;
+      self.clipboards[alias] = self.results;
+      self.currentClipboard = self.results;
       let deltaTime = Date.now() - startTime;
       console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     }
   };
-  this.clipboard.copy = function(objectName, alias) {
+  this.clipboard.paste = function(objectName, alias) {
+    let startTime = Date.now();
+    let self = this;
     if (true) {
-      this.action = "pasteActions";
+      self.action = "pasteActions";
       if (!alias) {
         console.error("Paste failed: Alias is not defined!");
         return this;
       }
-      if (!this.clipboards[alias]) {
+      if (!self.clipboards[alias]) {
         console.error("Paste failed: Alias does not exist!");
         return this;
       }
-      this.currentClipboard = this.clipboards[alias] || {};
+      self.currentClipboard = self.clipboards[alias] || {};
       if (!self._initObjects[objectName]) {
         return console.error("Paste failed: Object " + JSON.stringify(objectName) + " does not exist!");
       }
