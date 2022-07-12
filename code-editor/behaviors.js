@@ -522,6 +522,13 @@ _behaviorFunctionHandler.prototype = {
     this.init();
     this.action = "search";
     return this;
+  },
+  
+  get clipboard() {
+    this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    this.init();
+    this.action = "clipboard";
+    return this.clipboard;
   }
   
 };
