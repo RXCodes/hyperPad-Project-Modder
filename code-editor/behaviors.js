@@ -431,7 +431,6 @@ function _behaviorFunctionHandler() {
     console.log("Removed " + alias.trim() + " from clipboard.");
     return this;
   };
-  var behaviorObj = this;
   this.clipboard.copy = function(objectName, alias) {
     let startTime = Date.now();
     let self = this;
@@ -442,7 +441,7 @@ function _behaviorFunctionHandler() {
       }
       this.action = "copyActions";
       this.results = JSON.parse(JSON.stringify(_initBehaviors));
-      if (!self._initObjects[objectName]) {
+      if (!_initObjects[objectName]) {
         return console.error("Copy failed: Object " + JSON.stringify(objectName) + " does not exist!");
       }
       let zpks = self.objectZPKs;
@@ -472,7 +471,7 @@ function _behaviorFunctionHandler() {
         return this;
       }
       self.currentClipboard = self.clipboards[alias] || {};
-      if (!self._initObjects[objectName]) {
+      if (!_initObjects[objectName]) {
         return console.error("Paste failed: Object " + JSON.stringify(objectName) + " does not exist!");
       }
       
