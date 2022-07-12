@@ -341,12 +341,13 @@ function _behaviorFunctionHandler() {
   };
   
   // modifications - key = command | value = array of supported modes
-  let mods = {
+  this.mods = {
     enable: ["search", "paste", "create"],
     disable: ["search", "paste", "create"],
     destroy: ["search"],
     setInputField: ["search", "create"],
     secureInputField: ["search", "create"],
+    secureAllInputFields: ["search", "create"],
     disconnectInput: ["search", "create"],
     connectInput: ["search", "create"],
     disconnectAllInputs: ["search", "create"],
@@ -359,12 +360,12 @@ function _behaviorFunctionHandler() {
     moveToObject: ["search", "create", "paste"],
   };
   let behaviorsMain = this;
-  Object.keys(mods).forEach(function(mod) {
+  Object.keys(this.mods).forEach(function(mod) {
     behaviorsMain[mod] = function(...args) {
-      if (!mods[mod].includes(this.action)) {
-        return console.error("Invalid usage: " + mod);
+      if (!behaviorsMain.mods[mod].includes(behaviorsMain.action)) {
+        return console.error("Invalid usage: " + mod + " in " + behaviorsMain.action);
       }
-      postMessage("command", this.action, mod, args);
+      postMessage("command", behaviorsMain.action, mod, args);
       return this;
     };
   });
