@@ -368,7 +368,7 @@ function _behaviorFunctionHandler() {
         return console.error("Invalid usage: " + mod + " in " + behaviorsMain.action);
       }
       postMessage(["command", behaviorsMain.action, mod, args]);
-      return this;
+      return behaviorsMain;
     };
   });
   
