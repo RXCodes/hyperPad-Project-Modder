@@ -53,10 +53,30 @@ function _behaviorFunctionHandler() {
     });
     return this;
   };
-  this.objectOf = function() {
+  this.objectOf = function(objectName) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let zpks = self.objectZPKs;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (zpks[data.ZOBJECT] !== objectName) {
+        delete self.results[behavior];
+      }
+    });
+    return this;
+  };
+  this.notObjectOf = function(objectName) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    };
+    let zpks = self.objectZPKs;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (zpks[data.ZOBJECT] == objectName) {
+        delete self.results[behavior];
+      }
+    });
     return this;
   };
   this.isEnabled = function() {
@@ -237,6 +257,8 @@ _behaviorFunctionHandler.prototype = {
   get search() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
     if (!this.ztagInit) {
+      
+      // update ztags
       this.ztagInit = true;
       let ztags = {};
       let behaviors = this.results;
@@ -245,6 +267,15 @@ _behaviorFunctionHandler.prototype = {
         ztags[data.ZTAG] = data;
       });
       this.ztags = ztags;
+      
+      // update object zpks
+      let objectZPKs = {};
+      let objs = this._initObjects;
+      Object.keys(objs).forEach(function(name) {
+        let data = objs[name];
+        objectZPKs[data.ZPK] = data;
+      });
+      
     }
     this.action = "search";
     return this;
