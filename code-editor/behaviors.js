@@ -361,7 +361,7 @@ function _behaviorFunctionHandler() {
   let behaviorsMain = this;
   Object.keys(mods).forEach(function(mod) {
     behaviorsMain[mod] = function(...args) {
-      if (!mods[mod].include(this.action)) {
+      if (!mods[mod].includes(this.action)) {
         return console.error("Invalid syntax: " + mod);
       }
       postMessage("command", mod, args);
