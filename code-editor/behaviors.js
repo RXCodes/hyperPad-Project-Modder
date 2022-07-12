@@ -377,6 +377,18 @@ function _behaviorFunctionHandler() {
     }
     return "Does not work yet!";
   };
+  this.disconnectAllOutputs = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.disconnectAllInputs = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
   this.secureAllInputs = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
