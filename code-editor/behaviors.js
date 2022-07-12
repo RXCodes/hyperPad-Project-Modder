@@ -435,7 +435,6 @@ function _behaviorFunctionHandler() {
   this.clipboardHandler.copy = function(objectName, alias) {
     let startTime = Date.now();
     let self = _behaviorMain;
-   
     if (!alias) {
       console.error("Copy failed: Alias is not defined!");
       return self;
@@ -457,12 +456,10 @@ function _behaviorFunctionHandler() {
     let deltaTime = Date.now() - startTime;
     console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     return self;
-    
   };
   this.clipboardHandler.paste = function(objectName, alias) {
     let startTime = Date.now();
     let self = _behaviorMain;
-    
     self.action = "pasteActions";
     if (!alias) {
       console.error("Paste failed: Alias is not defined!");
@@ -482,7 +479,6 @@ function _behaviorFunctionHandler() {
     let deltaTime = Date.now() - startTime;
     console.debug("Pasted " + Object.keys(self.currentClipboard).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
     return self;
-   
   };
   
   // update ztags
