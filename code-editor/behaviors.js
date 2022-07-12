@@ -483,50 +483,42 @@ function _behaviorFunctionHandler() {
     return this;
   };
   
-  this.init = function() {
-    if (!this.ztagInit) {
+  // update ztags
+  this.ztagInit = true;
+  let ztags = {};
+  let behaviors = this.results;
+  Object.keys(behaviors).forEach(function(key) {
+    let data = behaviors[key];
+    ztags[data.ZTAG] = data;
+  });
+  this.ztags = ztags;
       
-      // update ztags
-      this.ztagInit = true;
-      let ztags = {};
-      let behaviors = this.results;
-      Object.keys(behaviors).forEach(function(key) {
-        let data = behaviors[key];
-        ztags[data.ZTAG] = data;
-      });
-      this.ztags = ztags;
+  // update object zpks
+  let objectZPKs = {};
+  let objs = JSON.parse(JSON.stringify(self._initObjects));
+  Object.keys(objs).forEach(function(name) {
+    let data = objs[name];
+    objectZPKs[data.Z_PK] = data    
+  });
+  this.objectZPKs = objectZPKs;
       
-      // update object zpks
-      let objectZPKs = {};
-      let objs = JSON.parse(JSON.stringify(self._initObjects));
-      Object.keys(objs).forEach(function(name) {
-        let data = objs[name];
-        objectZPKs[data.Z_PK] = data;
-      });
-      this.objectZPKs = objectZPKs;
-      
-    }
-  };
 }
 
 _behaviorFunctionHandler.prototype = {
   get search() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
-    this.init();
     this.action = "search";
     return this;
   },
   
   get all() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
-    this.init();
     this.action = "search";
     return this;
   },
   
   get clipboard() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
-    this.init();
     this.action = "clipboard";
     return this.clipboard;
   }
