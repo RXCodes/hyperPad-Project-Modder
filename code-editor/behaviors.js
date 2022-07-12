@@ -532,4 +532,16 @@ Array.prototype.format = function(seperator) {
   return JSON.stringify(this, null, seperator || "  ");
 };
 
+Object.prototype.log = function() {
+  console.log(JSON.stringify(Object.keys(this), null, seperator || "  "));
+}
+
+Object.prototype.logInternal = function() {
+  console.log(JSON.stringify(this, null, seperator || "  "));
+}
+
+Array.prototype.log = function() {
+  console.log(JSON.stringify(this, null, seperator || "  "));
+}
+
 const behaviors = new _behaviorFunctionHandler();
