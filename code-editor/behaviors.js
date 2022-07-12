@@ -83,6 +83,7 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
     let zpks = self.objectZPKs;
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
@@ -96,6 +97,7 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     };
+    let self = this;
     let zpks = self.objectZPKs;
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
