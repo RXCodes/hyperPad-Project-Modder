@@ -508,19 +508,19 @@ _behaviorFunctionHandler.prototype = {
     this.init();
     this.action = "search";
     return this;
-  }
+  };
   
   get copy() {
     this.action = "copy";
     this.init();
     return this;
-  }
+  };
 
   get paste() {
     this.action = "paste";
     this.init();
     return this;
-  }
+  };
   
 };
 
