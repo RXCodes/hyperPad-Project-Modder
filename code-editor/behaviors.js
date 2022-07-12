@@ -520,7 +520,7 @@ _behaviorFunctionHandler.prototype = {
     this.action = "paste";
     this.init();
     return this;
-  };
+  }
   
 };
 
