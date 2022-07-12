@@ -463,7 +463,7 @@ function _behaviorFunctionHandler() {
   this.clipboardHandler.paste = function(objectName, alias) {
     let startTime = Date.now();
     let self = _behaviorMain;
-    self.action = "paste
+    self.action = "paste"
     if (!alias) {
       console.error("Paste failed: Alias is not defined!");
       return self;
