@@ -299,7 +299,7 @@ _behaviorFunctionHandler.prototype = {
       let objs = JSON.parse(JSON.stringify(self._initObjects));
       Object.keys(objs).forEach(function(name) {
         let data = objs[name];
-        objectZPKs[data.ZPK] = data;
+        objectZPKs[data.Z_PK] = data;
       });
       this.objectZPKs = objectZPKs;
       
