@@ -364,7 +364,7 @@ function _behaviorFunctionHandler() {
       if (!mods[mod].includes(this.action)) {
         return console.error("Invalid syntax: " + mod);
       }
-      postMessage("command", mod, args);
+      postMessage("command", this.action, mod, args);
       return this;
     };
   });
