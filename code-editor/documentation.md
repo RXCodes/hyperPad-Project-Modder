@@ -30,7 +30,7 @@ Example Usage: **behaviors.search.objectOf("Empty-1").isRoot().log();**
   - `.isDisabled()`: Limits results to behaviors that are disabled.
   - `.includeChildren()`: Includes all children of the behavior(s) in the result.
   - `.withZPK(zpkNumber)`: Limits results to a behavior with the same ZPK identifier.
-    - `zpkNumber` **(NUMBER)** - A unique integer that all behaviors have. *(5, 24, 20)*
+    - `zpkNumber` **(NUMBER)** - A unique integer that all behaviors have. *(5, 24, 20, etc.)*
   - `.isRoot()`: Limits results to behaviors that are not connected from the top. These behaviors execute on start.
   - `.isNotRoot()`: Limits results to behaviors that are connected from the top.
 
