@@ -3,12 +3,13 @@ The code editor uses native javascript as the primary programming language, so *
 This documentation will review the additional capabilities and functionalities of using code in the editor of a hyperPad project.
 
 # The Behaviors
-`behaviors` **{Object}**
+`behaviors` **{Object}** <br>
+Example Usage: **behaviors.search.objectOf("Empty-1").isRoot().log();**
 
 ## Selecting Behaviors and Performing Operations on them
-- `.search`: Searches for behaviors to execute tasks on. Returns behavior class instances for each iteration.
+- `.search`: Searches for behaviors to execute tasks on.
 
-  **Scope Methods**
+  **Scope Methods**: Multiple scope functions can be chained to limit queries.
   - `.withName(behaviorName)`: Limits results to a behavior with the name provided - must be exact match.
   - `.includesName(behaviorName)`: Limits results to behaviors including the name provided.
   - `.categoryOf(category)`: Limits results to behaviors within a category. *(eg. Input, Logic, Custom, etc.)*
@@ -24,7 +25,7 @@ This documentation will review the additional capabilities and functionalities o
   - `.isRoot()`: Limits results to behaviors that are not connected from the top. These behaviors execute on start.
   - `.isNotRoot()`: Limits results to behaviors that are connected from the top.
 
-  **Action Methods**
+  **Action Methods**: Execute operations on the behaviors from the resulting search.
   - `.list()`: Returns an array of behavior names of the result.
   - `.listInternal()`: Returns an dictionary of behavior names with their corresponding internal data as the value.
   - `.log()`: Logs the behavior names of the result to the console.
@@ -43,24 +44,3 @@ This documentation will review the additional capabilities and functionalities o
 - `.paste(objectName, alias)`: Pastes behaviors copied to an alias in an object. Returns true if successful.
   - `objectName` **"STRING"** - The name of the object to paste behaviors in.
   - `alias` **"STRING"** - The alias to load the behaviors from - Use the same alias to load the same behaviors.
-
-# Example Code
- **Manipulating Behaviors** <br>
-  Get all behaviors in an object named "Empty-1" and destroy them.<br>
-  `behaviors.objectOf("Empty-1").destroy();`
-   
-  Get all behaviors in the Custom category in the project and console log them.<br>
-  `console.log(behaviors.categoryOf("Custom").list());`
-  
-  Get all Started Touching behaviors in an object named "Button" and disable them.<br>
-  `behaviors.typeOf("Started Touching").objectOf("Button").disable();`
-  
-  Get the entire behavior tree under "Receive Message5" and destroy them including the parent.<br>
-  `behaviors.withName("Receive Message5").includeChildren().destroy();`
-  
-  Get all behaviors containing "fart" in their name in an object called "Bad" and show it in the console log.<br>
-  `console.log(behaviors.includesName("fart").objectOf("Bad").list());`
-
-  Copy and paste a behavior tree from one object to another.<br>
-  `behaviors.withName("Behavior Bundle3").includeChildren().copy("myTree");` <br>
-  `behaviors.paste("Empty-2", "myTree");`
