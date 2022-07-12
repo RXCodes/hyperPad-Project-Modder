@@ -170,7 +170,6 @@ function _behaviorFunctionHandler() {
         check(ztag);
       });
     }
-    
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
       check(data.ZTAG);
@@ -333,6 +332,9 @@ function _behaviorFunctionHandler() {
       console.error("Paste failed: Alias does not exist!");
       return this;
     }
+    
+    // ENTER PASTE CODE HERE
+    
     let deltaTime = Date.now() - startTime;
     console.debug("Pasted " + Object.keys(this.clipboards[alias]).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
     return this;
@@ -356,7 +358,15 @@ function _behaviorFunctionHandler() {
     moveToPoint: ["search", "create", "paste"],
     moveToObject: ["search", "create", "paste"],
   };
+  let behaviorsMain = this;
   Object.keys(mods).forEach(function(mod) {
+    behaviorsMain[mod] = function(...args) {
+      if (!mods[mod].include(this.action)) {
+        return console.error("Invalid syntax: " + mod);
+      }
+      postMessage("command", mod, args);
+      return this;
+    };
   });
   
   // debug methods
@@ -397,7 +407,7 @@ function _behaviorFunctionHandler() {
     return result;
   };
   
-  // copy and pasting
+  // copy and pasting from object
   this.clipboards = {};
   this.currentClipboard = {};
   this.in = function(objectName, alias) {
@@ -442,6 +452,9 @@ function _behaviorFunctionHandler() {
       if (!self._initObjects[objectName]) {
         return console.error("Paste failed: Object " + JSON.stringify(objectName) + " does not exist!");
       }
+      
+      // ENTER PASTE CODE HERE
+      
       let deltaTime = Date.now() - startTime;
       console.debug("Pasted " + Object.keys(this.currentClipboard).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
     }
