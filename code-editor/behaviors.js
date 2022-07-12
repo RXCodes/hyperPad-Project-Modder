@@ -313,9 +313,9 @@ function _behaviorFunctionHandler() {
       console.error("Copy failed: Alias is not defined!");
       return this;
     }
-    this.clipboards[alias] = self.results;
+    this.clipboards[alias] = this.results;
     let deltaTime = Date.now() - startTime;
-    console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
+    console.debug("Copied " + Object.keys(this.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     return this;
   };
   
