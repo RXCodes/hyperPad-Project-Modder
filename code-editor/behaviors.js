@@ -495,7 +495,7 @@ function _behaviorFunctionHandler() {
   let objs = JSON.parse(JSON.stringify(self._initObjects));
   Object.keys(objs).forEach(function(name) {
     let data = objs[name];
-    objectZPKs[data.Z_PK] = data    
+    objectZPKs[data.Z_PK] = data;
   });
   this.objectZPKs = objectZPKs;
       
