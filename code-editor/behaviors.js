@@ -40,6 +40,19 @@ function _behaviorFunctionHandler() {
     });
     return this;
   };
+  this.notCategoryOf = function(category) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (data.ZACTIONS.behaviourCategory == category) {
+        delete self.results[behavior];
+      }
+    });
+    return this;
+  };
   this.typeOf = function(type) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
@@ -48,6 +61,19 @@ function _behaviorFunctionHandler() {
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
       if (data.ZNAME !== type) {
+        delete self.results[behavior];
+      }
+    });
+    return this;
+  };
+  this.notTypeOf = function(type) {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      if (data.ZNAME == type) {
         delete self.results[behavior];
       }
     });
