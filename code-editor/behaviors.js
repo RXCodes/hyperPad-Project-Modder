@@ -87,7 +87,7 @@ function _behaviorFunctionHandler() {
     let zpks = self.objectZPKs;
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
-      if (zpks[data.ZOBJECT] !== objectName) {
+      if (zpks[data.ZOBJECT].ZNAME !== objectName) {
         delete self.results[behavior];
       }
     });
@@ -101,7 +101,7 @@ function _behaviorFunctionHandler() {
     let zpks = self.objectZPKs;
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
-      if (zpks[data.ZOBJECT] == objectName) {
+      if (zpks[data.ZOBJECT].ZNAME == objectName) {
         delete self.results[behavior];
       }
     });
