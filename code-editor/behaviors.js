@@ -3,6 +3,7 @@ function _behaviorFunctionHandler() {
   this.action = undefined;
   this.results = {};
  
+  // scope methods
   this.withName = function(name) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
@@ -244,47 +245,7 @@ function _behaviorFunctionHandler() {
     return this;
   };
   
-  this.list = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    };
-    let result = Object.keys(this.results);
-    return result;
-  };
-  this.count = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    };
-    let result = Object.keys(this.results).length;
-    return result;
-  };
-  this.copy = function(alias) {
-    return "Does not work yet!";
-  };
-  this.enable = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.disable = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    };
-    return "Does not work yet!";
-  }
-  this.destroy = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.listInternal = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return this.results;
-  };
+  // get data from behaviors
   this.getInputNames = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
@@ -341,95 +302,69 @@ function _behaviorFunctionHandler() {
       return outputs;
     }
   };
-  this.setInput = function() {
+  
+  // copy behaviors in search
+  this.copy = function(alias) {
+    let startTime = Date.now();
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
-    return "Does not work yet!";
+    if (!alias) {
+      console.error("Copy failed: Alias is not defined!");
+      return this;
+    }
+    this.clipboards[alias] = self.results;
+    let deltaTime = Date.now() - startTime;
+    console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
+    return this;
   };
-  this.secureInput = function() {
+  
+  // replace behaviors in search
+  this.paste = function(alias) {
+    let startTime = Date.now();
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
-    return "Does not work yet!";
+    if (!alias) {
+      console.error("Copy failed: Alias is not defined!");
+      return this;
+    }
+    if (!this.clipboards[alias]) {
+      console.error("Paste failed: Alias does not exist!");
+      return this;
+    }
+    let deltaTime = Date.now() - startTime;
+    console.debug("Pasted " + Object.keys(this.clipboards[alias]).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
+    return this;
   };
-  this.disconnectInput = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
+  
+  // modifications - key = command | value = array of supported modes
+  let mods = {
+    enable: ["search", "paste", "create"],
+    disable: ["search", "paste", "create"],
+    destroy: ["search"],
+    setInputField: ["search", "create"],
+    secureInputField: ["search", "create"],
+    disconnectInput: ["search", "create"],
+    connectInput: ["search", "create"],
+    disconnectAllInputs: ["search", "create"],
+    disconnectAllOutputs: ["search", "create"],
+    hide: ["search", "paste", "create"],
+    show: ["search", "paste", "create"],
+    setType: ["search", "create"],
+    moveBy: ["search", "create", "paste"],
+    moveToPoint: ["search", "create", "paste"],
+    moveToObject: ["search", "create", "paste"],
   };
-  this.connectInput = function() {
+  Object.keys(mods).forEach(function(mod) {
+  });
+  
+  // debug methods
+  this.listInternal = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
-    return "Does not work yet!";
-  };
-  this.disconnectOutput = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.connectOutput = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.disconnectAllOutputs = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.disconnectAllInputs = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.secureAllInputs = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.hide = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.show = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.setType = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.moveBy = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.moveToPoint = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
-  };
-  this.moveToObject = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    return "Does not work yet!";
+    return this.results;
   };
   this.log = function(seperator) {
     if (this.action !== "search") {
@@ -447,6 +382,20 @@ function _behaviorFunctionHandler() {
     console.log(JSON.stringify(list, null, seperator || "  "));
     return this;
   };
+  this.list = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    };
+    let result = Object.keys(this.results);
+    return result;
+  };
+  this.count = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    };
+    let result = Object.keys(this.results).length;
+    return result;
+  };
   
   // copy and pasting
   this.clipboards = {};
@@ -455,10 +404,18 @@ function _behaviorFunctionHandler() {
     if (this.action !== "copy" && this.action !== "paste") {
       throw "Invalid usage - must use '.copy' or '.paste' beforehand.";
     }
+    let startTime = Date.now();
     if (this.action == "copy") {
+      if (!alias) {
+        console.error("Copy failed: Alias is not defined!");
+        return this;
+      }
       this.action = "copyActions";
       this.results = JSON.parse(JSON.stringify(self._initBehaviors));
       let self = this;
+      if (!self._initObjects[objectName]) {
+        return console.error("Copy failed: Object " + JSON.stringify(objectName) + " does not exist!");
+      }
       let zpks = self.objectZPKs;
       Object.keys(self.results).forEach(function(behavior) {
         let data = self.results[behavior];
@@ -468,10 +425,25 @@ function _behaviorFunctionHandler() {
       });
       this.clipboards[alias] = self.results;
       this.currentClipboard = self.results;
+      let deltaTime = Date.now() - startTime;
+      console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     }
     if (this.paste == "paste") {
       this.action = "pasteActions";
+      if (!alias) {
+        console.error("Paste failed: Alias is not defined!");
+        return this;
+      }
+      if (!this.clipboards[alias]) {
+        console.error("Paste failed: Alias does not exist!");
+        return this;
+      }
       this.currentClipboard = this.clipboards[alias] || {};
+      if (!self._initObjects[objectName]) {
+        return console.error("Paste failed: Object " + JSON.stringify(objectName) + " does not exist!");
+      }
+      let deltaTime = Date.now() - startTime;
+      console.debug("Pasted " + Object.keys(this.currentClipboard).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
     }
     return this;
   };
