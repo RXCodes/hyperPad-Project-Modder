@@ -291,7 +291,7 @@ function _behaviorFunctionHandler() {
         if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
           outputs[field] = inputData;
         }
-      })
+      });
     });
     return Object.keys(outputs);
   };
