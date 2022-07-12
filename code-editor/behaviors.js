@@ -303,7 +303,7 @@ function _behaviorFunctionHandler() {
     let self = this;
     Object.keys(self.results).forEach(function(behavior) {
       let data = self.results[behavior];
-      Object.keys(data.ZACTIONS).function(field) {
+      Object.keys(data.ZACTIONS).forEach(function(field) {
         let inputData = data.ZACTIONS[field] || {};
         if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
           outputs[field] = inputData;
