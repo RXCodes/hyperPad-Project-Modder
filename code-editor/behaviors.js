@@ -308,6 +308,7 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
+    this.action = "copy";
     if (!alias) {
       console.error("Copy failed: Alias is not defined!");
       return this;
@@ -324,6 +325,7 @@ function _behaviorFunctionHandler() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
+    this.action = "paste";
     if (!alias) {
       console.error("Copy failed: Alias is not defined!");
       return this;
@@ -440,7 +442,7 @@ function _behaviorFunctionHandler() {
       console.error("Copy failed: Alias is not defined!");
       return self;
     }
-    this.action = "copyActions";
+    this.action = "copy";
     this.results = JSON.parse(JSON.stringify(_initBehaviors));
     if (!_initObjects[objectName]) {
       return console.error("Copy failed: Object " + JSON.stringify(objectName) + " does not exist!");
@@ -461,7 +463,7 @@ function _behaviorFunctionHandler() {
   this.clipboardHandler.paste = function(objectName, alias) {
     let startTime = Date.now();
     let self = _behaviorMain;
-    self.action = "pasteActions";
+    self.action = "paste
     if (!alias) {
       console.error("Paste failed: Alias is not defined!");
       return self;
