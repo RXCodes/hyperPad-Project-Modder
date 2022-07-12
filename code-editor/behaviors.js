@@ -495,6 +495,13 @@ _behaviorFunctionHandler.prototype = {
     return this;
   },
   
+  get all() {
+    this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    this.init();
+    this.action = "search";
+    return this;
+  },
+  
   get copy() {
     this.action = "copy";
     this.init();
