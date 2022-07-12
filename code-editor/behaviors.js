@@ -408,6 +408,7 @@ function _behaviorFunctionHandler() {
   };
   
   // copy and pasting from object
+  var _behaviorMain = this;
   this.clipboards = {};
   this.currentClipboard = {};
   this.clipboardHandler = {};
@@ -415,29 +416,29 @@ function _behaviorFunctionHandler() {
     this.clipboards = {};
   };
   this.clipboardHandler.list = function() {
-    return Object.keys(this.clipboards);
+    return Object.keys(_behaviorMain.clipboards);
   }
   this.clipboardHandler.listInternal = function() {
-    return this.clipboards;
+    return _behaviorMain.clipboards;
   }
   this.clipboardHandler.log = function() {
-    return console.log(JSON.stringify(Object.keys(this.clipboards), null, "  "));
+    return console.log(JSON.stringify(Object.keys(_behaviorMain.clipboards), null, "  "));
   }
   this.clipboardHandler.logInternal = function() {
-    return console.log(JSON.stringify(this.clipboards, null, "  "));
+    return console.log(JSON.stringify(_behaviorMain.clipboards, null, "  "));
   }
   this.clipboardHandler.remove = function(alias) {
-    delete this.clipboards[alias];
+    delete _behaviorMain.clipboards[alias];
     console.log("Removed " + alias.trim() + " from clipboard.");
-    return this;
+    return _behaviorMain;
   };
   this.clipboardHandler.copy = function(objectName, alias) {
     let startTime = Date.now();
-    let self = this;
+    let self = _behaviorMain;
     if (true) {
       if (!alias) {
         console.error("Copy failed: Alias is not defined!");
-        return this;
+        return self;
       }
       this.action = "copyActions";
       this.results = JSON.parse(JSON.stringify(_initBehaviors));
@@ -459,16 +460,16 @@ function _behaviorFunctionHandler() {
   };
   this.clipboardHandler.paste = function(objectName, alias) {
     let startTime = Date.now();
-    let self = this;
+    let self = _behaviorMain;
     if (true) {
       self.action = "pasteActions";
       if (!alias) {
         console.error("Paste failed: Alias is not defined!");
-        return this;
+        return self;
       }
       if (!self.clipboards[alias]) {
         console.error("Paste failed: Alias does not exist!");
-        return this;
+        return self;
       }
       self.currentClipboard = self.clipboards[alias] || {};
       if (!_initObjects[objectName]) {
@@ -478,13 +479,12 @@ function _behaviorFunctionHandler() {
       // ENTER PASTE CODE HERE
       
       let deltaTime = Date.now() - startTime;
-      console.debug("Pasted " + Object.keys(this.currentClipboard).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
+      console.debug("Pasted " + Object.keys(self.currentClipboard).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
     }
     return this;
   };
   
   // update ztags
-  this.ztagInit = true;
   let ztags = {};
   let behaviors = this.results;
   Object.keys(behaviors).forEach(function(key) {
