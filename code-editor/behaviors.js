@@ -348,7 +348,7 @@ function _behaviorFunctionHandler() {
     disable: ["search", "paste", "create"],
     destroy: ["search"],
     setInputField: ["search", "create"],
-    secureInputField: ["search", "create"],
+    secureInputField: ["search", "create", "paste"],
     secureAllInputFields: ["search", "create", "paste"],
     disconnectInput: ["search", "create"],
     connectInput: ["search", "create"],
