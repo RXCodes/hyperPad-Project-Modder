@@ -410,28 +410,28 @@ function _behaviorFunctionHandler() {
   // copy and pasting from object
   this.clipboards = {};
   this.currentClipboard = {};
-  this.clipboard = {};
-  this.clipboard.clear = function() {
+  this.clipboardHandler = {};
+  this.clipboardHandler.clear = function() {
     this.clipboards = {};
   };
-  this.clipboard.list = function() {
+  this.clipboardHandler.list = function() {
     return Object.keys(this.clipboards);
   }
-  this.clipboard.listInternal = function() {
+  this.clipboardHandler.listInternal = function() {
     return this.clipboards;
   }
-  this.clipboard.log = function() {
+  this.clipboardHandler.log = function() {
     return console.log(JSON.stringify(Object.keys(this.clipboards), null, "  "));
   }
-  this.clipboard.logInternal = function() {
+  this.clipboardHandler.logInternal = function() {
     return console.log(JSON.stringify(this.clipboards, null, "  "));
   }
-  this.clipboard.remove = function(alias) {
+  this.clipboardHandler.remove = function(alias) {
     delete this.clipboards[alias];
     console.log("Removed " + alias.trim() + " from clipboard.");
     return this;
   };
-  this.clipboard.copy = function(objectName, alias) {
+  this.clipboardHandler.copy = function(objectName, alias) {
     let startTime = Date.now();
     let self = this;
     if (true) {
@@ -457,7 +457,7 @@ function _behaviorFunctionHandler() {
       console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     }
   };
-  this.clipboard.paste = function(objectName, alias) {
+  this.clipboardHandler.paste = function(objectName, alias) {
     let startTime = Date.now();
     let self = this;
     if (true) {
@@ -520,7 +520,7 @@ _behaviorFunctionHandler.prototype = {
   get clipboard() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
     this.action = "clipboard";
-    return this.clipboard;
+    return this.clipboardHandler;
   }
   
 };
