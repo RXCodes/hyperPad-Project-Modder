@@ -448,11 +448,35 @@ function _behaviorFunctionHandler() {
     return this;
   };
   
-}
-
-_behaviorFunctionHandler.prototype = {
-  get search() {
-    this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+  // copy and pasting
+  this.clipboards = {};
+  this.currentClipboard = {};
+  this.in = function(objectName, alias) {
+    if (this.action !== "copy" && this.action !== "paste") {
+      throw "Invalid usage - must use '.copy' or '.paste' beforehand.";
+    }
+    if (this.action == "copy") {
+      this.action = "copyActions";
+      this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+      let self = this;
+      let zpks = self.objectZPKs;
+      Object.keys(self.results).forEach(function(behavior) {
+        let data = self.results[behavior];
+        if (zpks[data.ZOBJECT].ZNAME !== objectName) {
+          delete self.results[behavior];
+        }
+      });
+      this.clipboards[alias] = self.results;
+      this.currentClipboard = self.results;
+    }
+    if (this.paste == "paste") {
+      this.action = "pasteActions";
+      this.currentClipboard = this.clipboards[alias] || {};
+    }
+    return this;
+  };
+  
+  this.init = function() {
     if (!this.ztagInit) {
       
       // update ztags
@@ -475,9 +499,29 @@ _behaviorFunctionHandler.prototype = {
       this.objectZPKs = objectZPKs;
       
     }
+  };
+}
+
+_behaviorFunctionHandler.prototype = {
+  get search() {
+    this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    this.init();
     this.action = "search";
     return this;
   }
+  
+  get copy() {
+    this.action = "copy";
+    this.init();
+    return this;
+  }
+
+  get paste() {
+    this.action = "paste";
+    this.init();
+    return this;
+  }
+  
 };
 
 Object.prototype.format = function(seperator) {
