@@ -353,6 +353,30 @@ function _behaviorFunctionHandler() {
     }
     return "Does not work yet!";
   };
+  this.disconnectInput = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.connectInput = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.disconnectOutput = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
+  this.connectOutput = function() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    return "Does not work yet!";
+  };
   this.secureAllInputs = function() {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
