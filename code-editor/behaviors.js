@@ -544,4 +544,8 @@ Array.prototype.log = function() {
   console.log(JSON.stringify(this, null, seperator || "  "));
 }
 
+Array.prototype.logInternal = function() {
+  console.log(JSON.stringify(this, null, seperator || "  "));
+}
+
 const behaviors = new _behaviorFunctionHandler();
