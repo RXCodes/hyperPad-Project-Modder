@@ -262,24 +262,7 @@ function _behaviorFunctionHandler() {
     });
     return Object.keys(outputs);
   };
-  this.getInputs = function() {
-    if (this.action !== "search") {
-      throw "Invalid usage - must use '.search' beforehand.";
-    }
-    let outputs = {};
-    let self = this;
-    Object.keys(self.results).forEach(function(behavior) {
-      let data = self.results[behavior];
-      Object.keys(data.ZACTIONS).forEach(function(field) {
-        let inputData = data.ZACTIONS[field] || {};
-        if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
-          outputs[field] = inputData;
-        }
-      })
-    });
-    return outputs;
-  };
-  this.getInput = function(input) {
+  this.inputOf = function(input) {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
@@ -350,8 +333,8 @@ function _behaviorFunctionHandler() {
     setInputField: ["search", "create"],
     secureInputField: ["search", "create", "paste"],
     secureAllInputFields: ["search", "create", "paste"],
-    disconnectInput: ["search", "create"],
-    connectInput: ["search", "create"],
+    disconnectOutput: ["search", "create"],
+    connectOutput: ["search", "create"],
     disconnectAllInputs: ["search", "create"],
     disconnectAllOutputs: ["search", "create"],
     hide: ["search", "paste", "create"],
@@ -521,7 +504,25 @@ _behaviorFunctionHandler.prototype = {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
     this.action = "clipboard";
     return this.clipboardHandler;
-  }
+  },
+  
+  get inputs() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let outputs = {};
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let data = self.results[behavior];
+      Object.keys(data.ZACTIONS).forEach(function(field) {
+        let inputData = data.ZACTIONS[field] || {};
+        if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
+          outputs[field] = inputData;
+        }
+      })
+    });
+    return outputs;
+  };
   
 };
 
