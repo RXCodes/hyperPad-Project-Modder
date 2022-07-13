@@ -510,9 +510,10 @@ _behaviorFunctionHandler.prototype = {
     if (this.action !== "search") {
       throw "Invalid usage - must use '.search' beforehand.";
     }
-    let outputs = {};
+    let entries = [];
     let self = this;
     Object.keys(self.results).forEach(function(behavior) {
+      let outputs = {};
       let data = self.results[behavior];
       Object.keys(data.ZACTIONS).forEach(function(field) {
         let inputData = data.ZACTIONS[field] || {};
@@ -520,8 +521,15 @@ _behaviorFunctionHandler.prototype = {
           outputs[field] = inputData;
         }
       })
+      entries.push(outputs);
     });
-    return outputs;
+    if (entries.length == 0) {
+      return {};
+    }
+    if (entries.length == 1) {
+      return entries[0];
+    }
+    return entries;
   };
   
 };
