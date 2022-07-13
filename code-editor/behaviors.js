@@ -530,7 +530,26 @@ _behaviorFunctionHandler.prototype = {
       return entries[0];
     }
     return entries;
-  };
+  },
+  
+  get inputFieldCount() {
+    if (this.action !== "search") {
+      throw "Invalid usage - must use '.search' beforehand.";
+    }
+    let count = 0;
+    let self = this;
+    Object.keys(self.results).forEach(function(behavior) {
+      let outputs = {};
+      let data = self.results[behavior];
+      Object.keys(data.ZACTIONS).forEach(function(field) {
+        let inputData = data.ZACTIONS[field] || {};
+        if (inputData.value !== undefined && inputData.controlledBy !== undefined) {
+          count++;
+        }
+      })
+    });
+    return count;
+  }
   
 };
 
