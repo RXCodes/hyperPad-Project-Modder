@@ -1,3 +1,10 @@
+var systemExperimental = false;
+Object.defineProperty(self, "experimental", {
+  get: function() {
+    console.debug("EXPERIMENTAL MODE ENABLED: modifications will not affect project");
+    systemExperimental = true;
+  }
+})
 
 function _behaviorFunctionHandler() {
   this.action = undefined;
@@ -350,6 +357,9 @@ function _behaviorFunctionHandler() {
       });
       
       // tell main thread to update the behavior if possible
+      if (self.systemExperimental) {
+        return;
+      }
       try {
         let ZPK = behaviorsMain.results[behavior].Z_PK;
         postMessage(["modifyBehavior", ZPK, behaviorsMain.results[behavior]]);
