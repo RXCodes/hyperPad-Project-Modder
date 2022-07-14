@@ -418,8 +418,10 @@ function _behaviorFunctionHandler() {
         return console.error("Invalid usage: " + mod + " in " + behaviorsMain.action);
       }
       try {
-        behaviorsMain.internal[mod][behaviorsMain.action](args);
-      } catch(e) {}
+        behaviorsMain.internal[mod](behaviorsMain.action, args);
+      } catch(e) {
+        console.error("Warning: " + behaviorsMain.action + "." + mod + " is not supported yet!");
+      }
       return behaviorsMain;
     };
   });
