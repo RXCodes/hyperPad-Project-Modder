@@ -325,6 +325,62 @@ function _behaviorFunctionHandler() {
     return this;
   };
   
+  // internal mods
+  this.internal = {
+    
+    // internal: modify a behavior
+    modifyBehavior: function(behavior, mods) {
+      
+      Object.keys(mods).forEach(function(key) {
+        
+        // update in results if possible
+        try {
+          behaviorsMain.results[behavior][key] = mods[key];
+        } catch(e) {
+          console.warn("Failed to update a behavior in results: " + e);
+        };
+        
+        // update in virtual behavior storage system if possible
+        try {
+          self._initBehaviors[behavior][key] = mods[key];
+        } catch(e) {
+          console.warn("Failed to update a behavior in virtual storage: " + e);
+        }
+        
+      });
+      
+      // tell main thread to update the behavior if possible
+      try {
+        let ZPK = behaviorsMain.results[behavior].Z_PK;
+        postMessage(["modifyBehavior", ZPK, behaviorsMain.results[behavior]]);
+      } catch(e) {
+        console.error("Failed to send modification command to main thread: " + e);
+      }
+      
+    },
+    
+    // enable result behaviors
+    enable: function() {
+      Object.keys(behaviorsMain.results).forEach(function(behavior) {
+        behaviorsMain.modifyBehavior(behavior, {
+          active: true
+        });
+      });
+      let count = Object.keys(behaviorsMain.results).length;
+      console.debug("Enabled " + count + " behaviors.");
+    },
+    // disable result behaviors
+    disable: function() {
+      Object.keys(behaviorsMain.results).forEach(function(behavior) {
+        behaviorsMain.modifyBehavior(behavior, {
+          active: false
+        });
+      });
+      let count = Object.keys(behaviorsMain.results).length;
+      console.debug("Disabled " + count + " behaviors.");
+    }
+  };
+  
   // modifications - key = command | value = array of supported modes
   this.mods = {
     enable: ["search", "paste", "create"],
@@ -340,6 +396,7 @@ function _behaviorFunctionHandler() {
     hide: ["search", "paste", "create"],
     show: ["search", "paste", "create"],
     setType: ["search", "create"],
+    setName: ["search", "create"],
     moveBy: ["search", "create", "paste"],
     moveToPoint: ["search", "create", "paste"],
     moveToObject: ["search", "create", "paste"],
@@ -350,7 +407,9 @@ function _behaviorFunctionHandler() {
       if (!behaviorsMain.mods[mod].includes(behaviorsMain.action)) {
         return console.error("Invalid usage: " + mod + " in " + behaviorsMain.action);
       }
-      postMessage(["command", behaviorsMain.action, mod, args]);
+      try {
+        behaviorsMain.internal[mod][behaviorsMain.action](args);
+      } catch(e) {}
       return behaviorsMain;
     };
   });
@@ -466,42 +525,75 @@ function _behaviorFunctionHandler() {
     console.debug("Pasted " + Object.keys(self.currentClipboard).length + " behaviors from " + alias + " (" + deltaTime + "ms)");
     return self;
   };
-  
-  // update ztags
-  let ztags = {};
-  let behaviors = this.results;
-  Object.keys(behaviors).forEach(function(key) {
-    let data = behaviors[key];
-    ztags[data.ZTAG] = data;
-  });
-  this.ztags = ztags;
-      
-  // update object zpks
-  let objectZPKs = {};
-  let objs = JSON.parse(JSON.stringify(self._initObjects));
-  Object.keys(objs).forEach(function(name) {
-    let data = objs[name];
-    objectZPKs[data.Z_PK] = data;
-  });
-  this.objectZPKs = objectZPKs;
       
 }
 
 _behaviorFunctionHandler.prototype = {
   get search() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    // update ztags
+    let ztags = {};
+    let behaviors = this.results;
+    Object.keys(behaviors).forEach(function(key) {
+      let data = behaviors[key];
+      ztags[data.ZTAG] = data;
+    });
+    this.ztags = ztags;
+
+    // update object zpks
+    let objectZPKs = {};
+    let objs = JSON.parse(JSON.stringify(self._initObjects));
+    Object.keys(objs).forEach(function(name) {
+      let data = objs[name];
+      objectZPKs[data.Z_PK] = data;
+    });
+    this.objectZPKs = objectZPKs;
     this.action = "search";
     return this;
   },
   
   get all() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    // update ztags
+    let ztags = {};
+    let behaviors = this.results;
+    Object.keys(behaviors).forEach(function(key) {
+      let data = behaviors[key];
+      ztags[data.ZTAG] = data;
+    });
+    this.ztags = ztags;
+
+    // update object zpks
+    let objectZPKs = {};
+    let objs = JSON.parse(JSON.stringify(self._initObjects));
+    Object.keys(objs).forEach(function(name) {
+      let data = objs[name];
+      objectZPKs[data.Z_PK] = data;
+    });
+    this.objectZPKs = objectZPKs;
     this.action = "search";
     return this;
   },
   
   get clipboard() {
     this.results = JSON.parse(JSON.stringify(self._initBehaviors));
+    // update ztags
+    let ztags = {};
+    let behaviors = this.results;
+    Object.keys(behaviors).forEach(function(key) {
+      let data = behaviors[key];
+      ztags[data.ZTAG] = data;
+    });
+    this.ztags = ztags;
+
+    // update object zpks
+    let objectZPKs = {};
+    let objs = JSON.parse(JSON.stringify(self._initObjects));
+    Object.keys(objs).forEach(function(name) {
+      let data = objs[name];
+      objectZPKs[data.Z_PK] = data;
+    });
+    this.objectZPKs = objectZPKs;
     this.action = "clipboard";
     return this.clipboardHandler;
   },
