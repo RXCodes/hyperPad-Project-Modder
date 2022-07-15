@@ -342,7 +342,7 @@ function _behaviorFunctionHandler() {
         
         // update in results if possible
         try {
-          if (key.includes("ZACTIONS") {
+          if (key.includes("ZACTIONS")) {
             behaviorsMain.results[behavior].ZACTIONS[key] = mods[key];
           } else {
             behaviorsMain.results[behavior][key] = mods[key];
@@ -353,7 +353,7 @@ function _behaviorFunctionHandler() {
         
         // update in virtual behavior storage system if possible
         try {
-          if (key.includes("ZACTIONS") {
+          if (key.includes("ZACTIONS")) {
             self._initBehaviors[behavior].ZACTIONS[key] = mods[key];
           } else {
             self._initBehaviors[behavior][key] = mods[key];
