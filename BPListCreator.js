@@ -508,7 +508,7 @@ module.exports = function(dicts) {
 };
 
 function toEntries(dicts) {
-  if (dicts.bplistOverride) {
+  if ((dicts || {}).bplistOverride) {
     return [dicts];
   }
 
