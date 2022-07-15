@@ -372,7 +372,7 @@ function _behaviorFunctionHandler() {
     // enable result behaviors
     enable: function() {
       Object.keys(behaviorsMain.results).forEach(function(behavior) {
-        behaviorsMain.modifyBehavior(behavior, {
+        behaviorsMain.internal.modifyBehavior(behavior, {
           active: true
         });
       });
@@ -382,7 +382,7 @@ function _behaviorFunctionHandler() {
     // disable result behaviors
     disable: function() {
       Object.keys(behaviorsMain.results).forEach(function(behavior) {
-        behaviorsMain.modifyBehavior(behavior, {
+        behaviorsMain.internal.modifyBehavior(behavior, {
           active: false
         });
       });
