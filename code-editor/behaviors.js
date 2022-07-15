@@ -342,14 +342,22 @@ function _behaviorFunctionHandler() {
         
         // update in results if possible
         try {
-          behaviorsMain.results[behavior][key] = mods[key];
+          if (key.includes("ZACTIONS") {
+            behaviorsMain.results[behavior].ZACTIONS[key] = mods[key];
+          } else {
+            behaviorsMain.results[behavior][key] = mods[key];
+          }
         } catch(e) {
           console.warn("Failed to update a behavior in results: " + e);
         };
         
         // update in virtual behavior storage system if possible
         try {
-          self._initBehaviors[behavior][key] = mods[key];
+          if (key.includes("ZACTIONS") {
+            self._initBehaviors[behavior].ZACTIONS[key] = mods[key];
+          } else {
+            self._initBehaviors[behavior][key] = mods[key];
+          }
         } catch(e) {
           console.warn("Failed to update a behavior in virtual storage: " + e);
         }
@@ -373,7 +381,7 @@ function _behaviorFunctionHandler() {
     enable: function() {
       Object.keys(behaviorsMain.results).forEach(function(behavior) {
         behaviorsMain.internal.modifyBehavior(behavior, {
-          active: true
+          ZACTIONS.active: true
         });
       });
       let count = Object.keys(behaviorsMain.results).length;
@@ -383,7 +391,7 @@ function _behaviorFunctionHandler() {
     disable: function() {
       Object.keys(behaviorsMain.results).forEach(function(behavior) {
         behaviorsMain.internal.modifyBehavior(behavior, {
-          active: false
+          ZACTIONS.active: false
         });
       });
       let count = Object.keys(behaviorsMain.results).length;
