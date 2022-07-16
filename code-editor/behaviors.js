@@ -695,6 +695,9 @@ Array.prototype.logInternal = function() {
 }
 
 function downloadFile(fileName, contents) {
+  if (typeof contents == "object") {
+    contents = JSON.stringify(contents, null, "  ");
+  }
   postMessage(["download", contents, fileName || "results.txt"]);
 }
 
