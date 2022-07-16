@@ -524,6 +524,9 @@ function _behaviorFunctionHandler() {
     console.debug("Copied " + Object.keys(self.results).length + " behaviors to " + alias + " (" + deltaTime + "ms)");
     return self;
   };
+  this.download = function(fileName) {
+    postMessage(["download", fileName, this.results]);
+  };
   this.clipboardHandler.paste = function(objectName, alias) {
     let startTime = Date.now();
     let self = _behaviorMain;
@@ -689,6 +692,10 @@ Array.prototype.log = function() {
 
 Array.prototype.logInternal = function() {
   console.log(JSON.stringify(this, null, seperator || "  "));
+}
+
+function downloadFile(fileName, contents) {
+  postMessage(["download", fileName, contents]);
 }
 
 const behaviors = new _behaviorFunctionHandler();
