@@ -695,7 +695,7 @@ Array.prototype.logInternal = function() {
 }
 
 function downloadFile(fileName, contents) {
-  postMessage(["download", fileName, contents]);
+  postMessage(["download", contents, fileName || "results.txt"]);
 }
 
 const behaviors = new _behaviorFunctionHandler();
