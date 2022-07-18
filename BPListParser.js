@@ -201,6 +201,44 @@ window.extract = function(data) {
             }
           });
         } catch (e) { };
+        
+        if (k == "control") {
+          try {
+            Object.keys(v).forEach(function(key) {
+              try {
+                v[key] = v[key]["NS.string"];
+              } catch(e) {};
+            })
+          } catch(e) {};
+        }
+        
+        // nested reference again
+        try {
+          function check(dict) {
+            try {
+            Object.keys(dict).forEach(function(k) {
+              if (dict[k].UID) {
+                dict[k] = actualObj[0]["$objects"][v[k].UID]
+              } else {
+                if (typeof dict[k] == "Object") {
+                  check(dict[k]);
+                }
+              }
+            });
+            } catch(e) {};
+          }
+          check(v);
+          try {
+            Object.keys(v).forEach(function(t) {
+              check(t);
+            });
+          } catch(e) {}
+          try {
+            v.forEach(function(t) {
+              check(t);
+            });
+          } catch(e) {};
+        } catch (e) { };
 
         result[k] = v
         index++;
