@@ -13,7 +13,7 @@ window.extract = function(data) {
 
   //return new Promise(async function(resolve) {
   
-  var exportTypes = true;
+  var exportTypes = false;
 
     try {
 
