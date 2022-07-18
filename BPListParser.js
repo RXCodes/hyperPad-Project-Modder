@@ -206,10 +206,22 @@ window.extract = function(data) {
           try {
             Object.keys(v).forEach(function(key) {
               try {
-                v[key] = v[key]["NS.string"];
+                if (v[key]["NS.string"] {
+                  v[key] = v[key]["NS.string"];
+                }
               } catch(e) {};
             })
           } catch(e) {};
+        }
+                   
+        if (k == "array") {
+          try {
+            let i = 0;
+            v.values.forEach(function(k) {
+              v[i] = actualObj[0]["$objects"][k.UID];
+            });
+          } catch(e) {
+          }
         }
         
         // nested reference again
