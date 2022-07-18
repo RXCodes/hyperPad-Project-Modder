@@ -218,40 +218,13 @@ window.extract = function(data) {
           try {
             let i = 0;
             v.values.forEach(function(k) {
-              v[i] = actualObj[0]["$objects"][k.UID];
+              v.values[i] = actualObj[0]["$objects"][k.UID];
+              i++;
             });
           } catch(e) {
           }
         }
-        
-        // nested reference again
-        try {
-          function check(dict) {
-            try {
-            Object.keys(dict).forEach(function(k) {
-              if (dict[k].UID) {
-                dict[k] = actualObj[0]["$objects"][v[k].UID]
-              } else {
-                if (typeof dict[k] == "Object") {
-                  check(dict[k]);
-                }
-              }
-            });
-            } catch(e) {};
-          }
-          check(v);
-          try {
-            Object.keys(v).forEach(function(t) {
-              check(t);
-            });
-          } catch(e) {}
-          try {
-            v.forEach(function(t) {
-              check(t);
-            });
-          } catch(e) {};
-        } catch (e) { };
-
+         
         result[k] = v
         index++;
       })
