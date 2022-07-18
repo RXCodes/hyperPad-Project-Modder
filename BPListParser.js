@@ -12,6 +12,8 @@ window.parseBuffer = function(data) {
 window.extract = function(data) {
 
   //return new Promise(async function(resolve) {
+  
+  var exportTypes = true;
 
     try {
 
@@ -91,8 +93,13 @@ window.extract = function(data) {
         try {
           if (v["$class"]) {
             let className = v["$class"]["$classname"];
+            
+            if (exportTypes) {
+              v = className;
+            } else {
 
             if (className == "UIColor") {
+              
               let val = v.NSRGB.toString();
               val = val.split(" ");
               let i = 0;
@@ -168,6 +175,8 @@ window.extract = function(data) {
                 }
               });
               v = val;
+            }
+              
             }
 
           };
