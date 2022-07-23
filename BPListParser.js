@@ -200,30 +200,7 @@ window.extract = function(data) {
               console.log(data)
             }
           });
-        } catch (e) { };
-        
-        if (k == "control") {
-          try {
-            Object.keys(v).forEach(function(key) {
-              try {
-                if (v[key]["NS.string"] {
-                  v[key] = v[key]["NS.string"];
-                }
-              } catch(e) {};
-            })
-          } catch(e) {};
-        }
-                   
-        if (k == "array") {
-          try {
-            let i = 0;
-            v.values.forEach(function(k) {
-              v.values[i] = actualObj[0]["$objects"][k.UID];
-              i++;
-            });
-          } catch(e) {
-          }
-        }
+        } catch (e) { };  
          
         result[k] = v
         index++;
