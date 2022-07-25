@@ -164,22 +164,22 @@ window.extract = function(data) {
         index++;
       })
       
-      // convert remaining UIDs
-      let it = true;
-      while (it) {
-        let prev = JSON.stringify(result);
-        let res = prev;
-        keys.forEach(function(item) {
+      // convert remaining UIDs if any
+      let splits = JSON.stringify(result).split("{\"UID\":");
+      if (splits.length > 1) {
+        let i = -1;
+        splits.forEach(function(item) {
+          i++;
+          if (i == 0) {
+            return;
+          }
+          item = item.split("}")[0];
           let str = "{\"UID\":" + item + "}";
           let replace = actualObj[0]["$objects"][objects[item]];
-          res = res.replaceAll(str, replace);
-          
+          splits = res.replaceAll(str, replace);
         });
-        if (prev == res) {
-          it = false;
-        }
-        result = JSON.parse(res);
-      }
+        result = JSON.parse(splits);
+      }    
 
       // return output
       resolve(result);
