@@ -165,6 +165,7 @@ window.extract = function(data) {
       })
       
       // convert remaining UIDs if any
+      try {
       let splits = JSON.stringify(result).split("{\"UID\":");
       if (splits.length > 1) {
         let i = -1;
@@ -176,10 +177,13 @@ window.extract = function(data) {
           item = item.split("}")[0];
           let str = "{\"UID\":" + item + "}";
           let replace = actualObj[0]["$objects"][objects[item]];
-          splits = res.replaceAll(str, replace);
+          splits = splits.replaceAll(str, replace);
         });
         result = JSON.parse(splits);
-      }    
+      } 
+      } catch(e) {
+        console.error("Behavior Parsing error: " + e);
+      }
 
       // return output
       resolve(result);
