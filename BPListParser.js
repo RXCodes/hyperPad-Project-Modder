@@ -172,14 +172,12 @@ window.extract = function(data) {
         keys.forEach(function(item) {
           let str = "{\"UID\":" + item + "}";
           let replace = actualObj[0]["$objects"][objects[item]];
-          console.log(str, replace);
           res = res.replaceAll(str, replace);
           
         });
         if (prev == res) {
           it = false;
         }
-        console.log(res)
         result = JSON.parse(res);
       }
 
