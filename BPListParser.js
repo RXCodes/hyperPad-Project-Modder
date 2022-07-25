@@ -3,17 +3,10 @@
 const bplist = require('bplist-parser');
 require("buffer")
 
-// parse buffer
-window.parseBuffer = function(data) {
-  return bplist.parseBuffer(data);
-}
-  
 // extract data from hyperPad object / behavior
 window.extract = function(data) {
 
-  //return new Promise(async function(resolve) {
-  
-  var exportTypes = false;
+  return new Promise(async function(resolve) {
 
     try {
 
@@ -27,12 +20,6 @@ window.extract = function(data) {
       
       // get keys
       let keys = [];
-      
-      if (!meta["NS.keys"]) {
-        console.debug(actualObj);
-        console.log(JSON.stringify(actualObj));
-      }
-      
       meta["NS.keys"].forEach(function(dict) {
         keys.push(dict.UID);
       })
@@ -42,22 +29,14 @@ window.extract = function(data) {
       meta["NS.objects"].forEach(function(dict) {
         objects.push(dict.UID);
       })
+      
+      let result = {};
 
       // key to value
-      let result = {};
       let index = 0;
       keys.forEach(function(uid) {
         k = actualObj[0]["$objects"][uid];
         let v = actualObj[0]["$objects"][objects[index]];
-        
-        if (k == "outputs") {
-          v = v["NS.objects"];
-          let arr = [];
-          v.forEach(function(value) {
-            arr.push(actualObj[0]["$objects"][value.UID]);
-          })
-          v = arr;
-        }
 
         // nested reference
         try {
@@ -93,13 +72,8 @@ window.extract = function(data) {
         try {
           if (v["$class"]) {
             let className = v["$class"]["$classname"];
-            
-            if (exportTypes) {
-              v = className;
-            } else {
 
             if (className == "UIColor") {
-              
               let val = v.NSRGB.toString();
               val = val.split(" ");
               let i = 0;
@@ -125,24 +99,10 @@ window.extract = function(data) {
               });
               v = val;
             }
-            
+
             if (className == "NSMutableArray") {
               delete v["$class"];
               v = v["NS.objects"];
-            }
-            
-            if (className == "NSNull") {
-              v = null;
-            }
-
-            if (className == "NSArray") {
-              delete v["$class"];
-              v = v["NS.objects"];
-              let arr = [];
-              v.forEach(function(UID) {
-                arr.push(actualObj[0]["$objects"][UID.UID]);
-              });
-              v = arr;
             }
 
             if (className == "NSMutableString") {
@@ -176,8 +136,6 @@ window.extract = function(data) {
               });
               v = val;
             }
-              
-            }
 
           };
         } catch (e) { };
@@ -200,22 +158,41 @@ window.extract = function(data) {
               console.log(data)
             }
           });
-        } catch (e) { };  
-         
+        } catch (e) { };
+
         result[k] = v
         index++;
       })
+      
+      // convert remaining UIDs
+      let it = true;
+      while (it) {
+        let prev = JSON.stringify(result);
+        let res = prev;
+        keys.forEach(function(item) {
+          let str = "{\"UID\":" + item + "}";
+          let replace = actualObj[0]["$objects"][objects[item]];
+          console.log(str, replace);
+          res = res.replaceAll(str, replace);
+          
+        });
+        if (prev == res) {
+          it = false;
+        }
+        console.log(res)
+        result = JSON.parse(res);
+      }
 
       // return output
-      return result;
+      resolve(result);
     } catch(e) {
       console.error(e);
-      return {
+      resolve({
         success: false
-      };
+      });
     }
 
-  //});
+  });
 
 }
 }).call(this)}).call(this,{"isBuffer":require("./node_modules/is-buffer/index.js")})
