@@ -6,8 +6,6 @@ require("buffer")
 // extract data from hyperPad object / behavior
 window.extract = function(data) {
 
-  return new Promise(async function(resolve) {
-
     try {
 
       // read file
@@ -169,7 +167,7 @@ window.extract = function(data) {
       let splits = JSON.stringify(result).split("{\"UID\":");
       if (splits.length > 1) {
         let i = -1;
-        let split = JSON.parse(JSON.stringify(split));
+        let split = JSON.parse(JSON.stringify(splits));
         splits = JSON.stringify(result);
         split.forEach(function(item) {
           i++;
@@ -188,15 +186,15 @@ window.extract = function(data) {
       }
 
       // return output
-      resolve(result);
+      return result;
     } catch(e) {
       console.error(e);
-      resolve({
+      return {
         success: false
-      });
+      };
     }
 
-  });
+  
 
 }
 }).call(this)}).call(this,{"isBuffer":require("./node_modules/is-buffer/index.js")})
