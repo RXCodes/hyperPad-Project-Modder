@@ -169,7 +169,8 @@ window.extract = function(data) {
       let splits = JSON.stringify(result).split("{\"UID\":");
       if (splits.length > 1) {
         let i = -1;
-        splits.forEach(function(item) {
+        let split = JSON.parse(JSON.stringify(split));
+        split.forEach(function(item) {
           i++;
           if (i == 0) {
             return;
