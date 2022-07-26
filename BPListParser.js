@@ -177,7 +177,7 @@ window.extract = function(data) {
             return;
           }
           item = item.split("}")[0];
-          let str = "{\"UID\":" + item + "}";
+          let str = '{"UID":' + item + '}';
           let replace = actualObj[0]["$objects"][objects[item]];
           splits = splits.replaceAll(str, replace);
         });
