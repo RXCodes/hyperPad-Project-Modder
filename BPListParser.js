@@ -164,7 +164,7 @@ window.extract = function(data) {
       
       // convert remaining UIDs if any
       try {
-      let splits = JSON.stringify(result).split("{\"UID\":");
+      let splits = JSON.stringify(result).split('{"UID":');
       if (splits.length > 1) {
         let i = -1;
         let split = JSON.parse(JSON.stringify(splits));
@@ -175,6 +175,7 @@ window.extract = function(data) {
             return;
           }
           item = item.split("}")[0];
+          console.log(item);
           let str = '{"UID":' + item + '}';
           let replace = actualObj[0]["$objects"][objects[item]];
           splits = splits.replaceAll(str, replace);
