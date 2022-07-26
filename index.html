@@ -1128,7 +1128,7 @@ input:checked + .slider:before {
         result.objectData = data;
       }
       console.debug(result);
-      downloadFile(result, "singleJSON.json")
+      downloadFile(JSON.stringify(data), "singleJSON.json")
     }
 </script>
         
