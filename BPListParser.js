@@ -170,6 +170,7 @@ window.extract = function(data) {
       if (splits.length > 1) {
         let i = -1;
         let split = JSON.parse(JSON.stringify(split));
+        splits = JSON.stringify(result);
         split.forEach(function(item) {
           i++;
           if (i == 0) {
