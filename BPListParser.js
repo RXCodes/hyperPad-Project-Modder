@@ -215,12 +215,12 @@ window.extract = function(data) {
       try {
         Object.keys(result).forEach(function(k) {
           let data = result[k];
-          if (data[k].type == "Array") {
-            result.array.value.forEach(function(x) {
+          if (data.type == "Array") {
+            result[k].value.forEach(function(x) {
               handleApple(x);
             });
           }
-          if (data[k].type == "Dictionary") {
+          if (data.type == "Dictionary") {
             handleApple(data[k].value);
           }
         });
