@@ -15,6 +15,81 @@ window.extract = function(data) {
       // fetch data from file
       let actualObj = bplist.parseBuffer(objmain);
       meta = actualObj[0]["$objects"][1]
+        
+      // handle Apple data if any
+        function handleApple(v) {
+            try {
+              if (v["$class"]) {
+                let className = v["$class"]["$classname"];
+
+                if (className == "UIColor") {
+                  let val = v.NSRGB.toString();
+                  val = val.split(" ");
+                  let i = 0;
+                  val.forEach(function(num) {
+                    val[i] = Number(num);
+                    i++;
+                  })
+                  v = val;
+                  delete v["$class"];
+                }
+
+                if (className == "NSValue") {
+                  let val = undefined;
+                  Object.keys(v).forEach(function(key) {
+                    if (key.endsWith("val")) {
+                      val = v[key];
+                      try {
+                        data = val.replace(/{/gi, "[");
+                        data = data.replace(/}/gi, "]");
+                        val = JSON.parse(data);
+                      } catch (e) {};
+                    }
+                  });
+                  v = val;
+                }
+                  
+                  if (className == "NSMutableArray") {
+                  delete v["$class"];
+                  v = v["NS.objects"];
+                }
+
+                if (className == "NSMutableString") {
+                  delete v["$class"];
+                  v = v["NS.string"];
+                }
+
+                if (className == "BehaviourInputField") {
+                  delete v["$class"];
+                  v.valueKey = actualObj[0]["$objects"][v.valueKey.UID];
+                  if (v.valueKey == "$null") {
+                    v.valueKey = null;
+                  }
+                  v.type = actualObj[0]["$objects"][v.type.UID];
+                  if (v.type == "$null") {
+                    v.type = null;
+                  }
+                }
+
+                if (className == "NSMutableSet") {
+                  let val = undefined;
+                  Object.keys(v).forEach(function(key) {
+                    if (key.endsWith("objects")) {
+                      val = v[key];
+                      try {
+                        data = val.replace(/{/gi, "[");
+                        data = data.replace(/}/gi, "]");
+                        val = JSON.parse(data);
+                      } catch (e) { };
+                    }
+                  });
+                  v = val;
+            }
+
+              };
+            } catch (e) {};
+        }
+
       
       // get keys
       let keys = [];
@@ -64,81 +139,7 @@ window.extract = function(data) {
             })
             v = dict;
           }
-        } catch (e) { };
-
-        // handle Apple data if any
-        function handleApple(v) {
-            try {
-              if (v["$class"]) {
-                let className = v["$class"]["$classname"];
-
-                if (className == "UIColor") {
-                  let val = v.NSRGB.toString();
-                  val = val.split(" ");
-                  let i = 0;
-                  val.forEach(function(num) {
-                    val[i] = Number(num);
-                    i++;
-                  })
-                  v = val;
-                  delete v["$class"];
-                }
-
-                if (className == "NSValue") {
-                  let val = undefined;
-                  Object.keys(v).forEach(function(key) {
-                    if (key.endsWith("val")) {
-                      val = v[key];
-                      try {
-                        data = val.replace(/{/gi, "[");
-                        data = data.replace(/}/gi, "]");
-                        val = JSON.parse(data);
-                      } catch (e) {};
-                    }
-                  });
-                  v = val;
-                }
-
-                if (className == "NSMutableArray") {
-                  delete v["$class"];
-                  v = v["NS.objects"];
-                }
-
-                if (className == "NSMutableString") {
-                  delete v["$class"];
-                  v = v["NS.string"];
-                }
-
-                if (className == "BehaviourInputField") {
-                  delete v["$class"];
-                  v.valueKey = actualObj[0]["$objects"][v.valueKey.UID];
-                  if (v.valueKey == "$null") {
-                    v.valueKey = null;
-                  }
-                  v.type = actualObj[0]["$objects"][v.type.UID];
-                  if (v.type == "$null") {
-                    v.type = null;
-                  }
-                }
-
-                if (className == "NSMutableSet") {
-                  let val = undefined;
-                  Object.keys(v).forEach(function(key) {
-                    if (key.endsWith("objects")) {
-                      val = v[key];
-                      try {
-                        data = val.replace(/{/gi, "[");
-                        data = data.replace(/}/gi, "]");
-                        val = JSON.parse(data);
-                      } catch (e) { };
-                    }
-                  });
-                  v = val;
-            }
-
-              };
-            } catch (e) {};
-        }
+        } catch (e) { };          
           
         // handle main value
         handleApple(v);
@@ -146,7 +147,7 @@ window.extract = function(data) {
         // handle nested values if any
         try {
           Object.keys(v).forEach(function(k) {
-             handleApple(k);
+             handleApple(v[k]);
           });
         } catch(e) {}
           
@@ -197,6 +198,9 @@ window.extract = function(data) {
       } catch(e) {
         console.error("Behavior Parsing error: " + e);
       }
+        
+      // loop through keys
+      
 
       // return output
       return result;
