@@ -167,20 +167,20 @@ window.extract = function(data) {
       let splits = JSON.stringify(result).split('{"UID":');
       if (splits.length > 1) {
         let i = -1;
-        let split = JSON.parse(JSON.stringify(splits));
-        splits = JSON.stringify(result);
-        split.forEach(function(item) {
+        let loop = JSON.parse(JSON.stringify(splits));
+        let text = JSON.stringify(result);
+        loop.forEach(function(item) {
           i++;
           if (i == 0) {
             return;
           }
           item = item.split("}")[0];
-          console.log(item);
+          console.log("item: " + item);
           let str = '{"UID":' + item + '}';
           let replace = actualObj[0]["$objects"][objects[item]];
-          splits = splits.replaceAll(str, replace);
+          text = text.replaceAll(str, replace);
         });
-        result = JSON.parse(splits);
+        result = JSON.parse(text);
       } 
       } catch(e) {
         console.error("Behavior Parsing error: " + e);
