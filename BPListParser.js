@@ -200,12 +200,15 @@ window.extract = function(data) {
       }
       }
         
-      // loop through keys
-      Object.keys(result).forEach(function(k) {
-        try {
-          handleApple(result[k])
-        } catch(e) {};
-      });
+      // handle apple data with arrays, box containers, etc.
+      try {
+        handleApple(result.array.value);
+      } catch(e) {};
+      try {
+        Object.keys(result.control).forEach(function(k) {
+          handleApple(result.control[k]);
+        });
+      } catch(e) {};
 
       // return output
       return result;
