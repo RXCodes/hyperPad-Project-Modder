@@ -203,9 +203,7 @@ window.extract = function(data) {
       // loop through keys
       Object.keys(result).forEach(function(k) {
         try {
-          Object.keys(result[k]).forEach(function(k2) {
-             handleApple(result[k][k2]);
-          });
+          handleApple(result[k])
         } catch(e) {};
       });
 
