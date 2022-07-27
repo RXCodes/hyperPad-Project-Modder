@@ -200,14 +200,23 @@ window.extract = function(data) {
       }
       }
         
-      // handle apple data with arrays, box containers, etc.
-      try {
-        handleApple(result.array.value);
-      } catch(e) {};
+      // handle apple data with box containers
       try {
         Object.keys(result.control).forEach(function(k) {
-          handleApple(result.control[k]);
+          try {
+            if (result.control[k]["NS.string"]) {
+              result.control[k] = result.control[k]["NS.string"];
+            }
+          } catch(e) {};
         });
+      } catch(e) {};
+        
+      // handle apple data with arrays
+      try {
+        if (result.array.value["NS.objects"]) {
+          result.array.value = result.array.value["NS.objects"];
+          handleApple(result.array.value);
+        }
       } catch(e) {};
 
       // return output
