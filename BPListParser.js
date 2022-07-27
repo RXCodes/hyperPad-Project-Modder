@@ -176,13 +176,13 @@ window.extract = function(data) {
       })
       
       // convert remaining UIDs if any
+      for (i = 0; i < 3; i++) {
       try {
       let splits = JSON.stringify(result).split('{"UID":');
       if (splits.length > 1) {
         let i = -1;
-        let loop = JSON.parse(JSON.stringify(splits));
         let text = JSON.stringify(result);
-        loop.forEach(function(item) {
+        splits.forEach(function(item) {
           i++;
           if (i == 0) {
             return;
@@ -190,13 +190,14 @@ window.extract = function(data) {
           item = item.split("}")[0];
           let str = '{"UID":' + item + '}';
           let replace = JSON.stringify(actualObj[0]["$objects"][item]);
-          console.log(str, JSON.stringify(replace));
+          console.log(str, replace);
           text = text.replaceAll(str, replace);
         });
         result = JSON.parse(text);
       } 
       } catch(e) {
         console.error("Behavior Parsing error: " + e);
+      }
       }
         
       // loop through keys
