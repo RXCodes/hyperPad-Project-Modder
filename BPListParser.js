@@ -211,14 +211,19 @@ window.extract = function(data) {
         });
       } catch(e) {};
         
-      // handle apple data with arrays
+      // handle apple data with arrays and dictionaries
       try {
-        if (result.array.value["NS.objects"]) {
-          result.array.value = result.array.value["NS.objects"];
-          result.array.value.forEach(function(x) {
-            handleApple(x);
-          });
-        }
+        Object.keys(result).forEach(function(k) {
+          let data = result[k];
+          if (data[k].type == "Array") {
+            result.array.value.forEach(function(x) {
+              handleApple(x);
+            });
+          }
+          if (data[k].type == "Dictionary") {
+            handleApple(data[k].value);
+          }
+        });
       } catch(e) {};
 
       // return output
