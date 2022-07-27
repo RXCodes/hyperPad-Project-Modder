@@ -215,7 +215,9 @@ window.extract = function(data) {
       try {
         if (result.array.value["NS.objects"]) {
           result.array.value = result.array.value["NS.objects"];
-          handleApple(result.array.value);
+          result.array.value.forEach(function(x) {
+            handleApple(x);
+          }
         }
       } catch(e) {};
 
