@@ -189,7 +189,7 @@ window.extract = function(data) {
           }
           item = item.split("}")[0];
           let str = '{"UID":' + item + '}';
-          let replace = actualObj[0]["$objects"][objects[item]];
+          let replace = actualObj[0]["$objects"][item];
           console.log(str, JSON.stringify(replace));
           text = text.replaceAll(str, replace);
         });
