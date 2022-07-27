@@ -66,87 +66,90 @@ window.extract = function(data) {
           }
         } catch (e) { };
 
-        // handle Apple data
-        try {
-          if (v["$class"]) {
-            let className = v["$class"]["$classname"];
+        // handle Apple data if any
+        function handleApple(v) {
+            try {
+              if (v["$class"]) {
+                let className = v["$class"]["$classname"];
 
-            if (className == "UIColor") {
-              let val = v.NSRGB.toString();
-              val = val.split(" ");
-              let i = 0;
-              val.forEach(function(num) {
-                val[i] = Number(num);
-                i++;
-              })
-              v = val;
-              delete v["$class"];
-            }
-
-            if (className == "NSValue") {
-              let val = undefined;
-              Object.keys(v).forEach(function(key) {
-                if (key.endsWith("val")) {
-                  val = v[key];
-                  try {
-                    data = val.replace(/{/gi, "[");
-                    data = data.replace(/}/gi, "]");
-                    val = JSON.parse(data);
-                  } catch (e) { };
+                if (className == "UIColor") {
+                  let val = v.NSRGB.toString();
+                  val = val.split(" ");
+                  let i = 0;
+                  val.forEach(function(num) {
+                    val[i] = Number(num);
+                    i++;
+                  })
+                  v = val;
+                  delete v["$class"];
                 }
-              });
-              v = val;
-            }
 
-            if (className == "NSMutableArray") {
-              delete v["$class"];
-              v = v["NS.objects"];
-            }
-
-            if (className == "NSMutableString") {
-              delete v["$class"];
-              v = v["NS.string"];
-            }
-
-            if (className == "BehaviourInputField") {
-              delete v["$class"];
-              v.valueKey = actualObj[0]["$objects"][v.valueKey.UID];
-              if (v.valueKey == "$null") {
-                v.valueKey = null;
-              }
-              v.type = actualObj[0]["$objects"][v.type.UID];
-              if (v.type == "$null") {
-                v.type = null;
-              }
-            }
-
-            if (className == "NSMutableSet") {
-              let val = undefined;
-              Object.keys(v).forEach(function(key) {
-                if (key.endsWith("objects")) {
-                  val = v[key];
-                  try {
-                    data = val.replace(/{/gi, "[");
-                    data = data.replace(/}/gi, "]");
-                    val = JSON.parse(data);
-                  } catch (e) { };
+                if (className == "NSValue") {
+                  let val = undefined;
+                  Object.keys(v).forEach(function(key) {
+                    if (key.endsWith("val")) {
+                      val = v[key];
+                      try {
+                        data = val.replace(/{/gi, "[");
+                        data = data.replace(/}/gi, "]");
+                        val = JSON.parse(data);
+                      } catch (e) {};
+                    }
+                  });
+                  v = val;
                 }
-              });
-              v = val;
+
+                if (className == "NSMutableArray") {
+                  delete v["$class"];
+                  v = v["NS.objects"];
+                }
+
+                if (className == "NSMutableString") {
+                  delete v["$class"];
+                  v = v["NS.string"];
+                }
+
+                if (className == "BehaviourInputField") {
+                  delete v["$class"];
+                  v.valueKey = actualObj[0]["$objects"][v.valueKey.UID];
+                  if (v.valueKey == "$null") {
+                    v.valueKey = null;
+                  }
+                  v.type = actualObj[0]["$objects"][v.type.UID];
+                  if (v.type == "$null") {
+                    v.type = null;
+                  }
+                }
+
+                if (className == "NSMutableSet") {
+                  let val = undefined;
+                  Object.keys(v).forEach(function(key) {
+                    if (key.endsWith("objects")) {
+                      val = v[key];
+                      try {
+                        data = val.replace(/{/gi, "[");
+                        data = data.replace(/}/gi, "]");
+                        val = JSON.parse(data);
+                      } catch (e) { };
+                    }
+                  });
+                  v = val;
             }
 
-          };
-        } catch (e) { };
-
-        // nested array with references
+              };
+            } catch (e) {};
+        }
+          
+        // handle main value
+        handleApple(v);
+          
+        // handle nested values if any
         try {
-          v.forEach(function(k) {
-            if (k.UID) {
-              v = actualObj[0]["$objects"][k.UID]
-            }
+          Object.keys(v).forEach(function(k) {
+             handleApple(k);
           });
-        } catch (e) {};
-        
+        } catch(e) {}
+          
         // convert remaining buffers to readible text
         try {
           Object.keys(v).forEach(function(k) {
@@ -157,6 +160,15 @@ window.extract = function(data) {
             }
           });
         } catch (e) { };
+
+        // nested array with references
+        try {
+          v.forEach(function(k) {
+            if (k.UID) {
+              v = actualObj[0]["$objects"][k.UID]
+            }
+          });
+        } catch (e) {};
 
         result[k] = v
         index++;
