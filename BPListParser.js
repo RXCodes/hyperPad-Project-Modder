@@ -157,7 +157,7 @@ window.extract = function(data) {
             if (Buffer.isBuffer(v[k])) {
               let data = v[k].toString();
               v = data;
-              console.log(data)
+              
             }
           });
         } catch (e) { };
@@ -190,7 +190,7 @@ window.extract = function(data) {
           item = item.split("}")[0];
           let str = '{"UID":' + item + '}';
           let replace = JSON.stringify(actualObj[0]["$objects"][item]);
-          console.log(str, replace);
+          
           text = text.replaceAll(str, replace);
         });
         result = JSON.parse(text);
