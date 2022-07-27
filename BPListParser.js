@@ -49,7 +49,7 @@ window.extract = function(data) {
                   v = val;
                 }
                   
-                  if (className == "NSMutableArray") {
+                if (className == "NSMutableArray") {
                   delete v["$class"];
                   v = v["NS.objects"];
                 }
@@ -189,7 +189,7 @@ window.extract = function(data) {
           }
           item = item.split("}")[0];
           let str = '{"UID":' + item + '}';
-          let replace = actualObj[0]["$objects"][item];
+          let replace = JSON.stringify(actualObj[0]["$objects"][item]);
           console.log(str, JSON.stringify(replace));
           text = text.replaceAll(str, replace);
         });
