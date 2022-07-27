@@ -217,7 +217,7 @@ window.extract = function(data) {
           result.array.value = result.array.value["NS.objects"];
           result.array.value.forEach(function(x) {
             handleApple(x);
-          }
+          });
         }
       } catch(e) {};
 
