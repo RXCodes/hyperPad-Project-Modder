@@ -61,11 +61,11 @@ window.extract = function(data) {
 
                 if (className == "BehaviourInputField") {
                   delete v["$class"];
-                  v.valueKey = actualObj[0]["$objects"][v.valueKey.UID];
+                  v.valueKey = actualObj[0]["$objects"][v.valueKey.UID] || v.valueKey;
                   if (v.valueKey == "$null") {
                     v.valueKey = null;
                   }
-                  v.type = actualObj[0]["$objects"][v.type.UID];
+                  v.type = actualObj[0]["$objects"][v.type.UID] || v.type;
                   if (v.type == "$null") {
                     v.type = null;
                   }
@@ -215,9 +215,9 @@ window.extract = function(data) {
       try {
         if (result.array.value["NS.objects"]) {
           result.array.value = result.array.value["NS.objects"];
-          //result.array.value.forEach(function(x) {
-          //  handleApple(x);
-          //});
+          result.array.value.forEach(function(x) {
+            handleApple(x);
+          });
         }
       } catch(e) {};
 
