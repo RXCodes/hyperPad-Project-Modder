@@ -218,6 +218,7 @@ window.extract = function(data) {
             let array = [];
             result[key].value["NS.objects"].forEach(function(entry) {
                delete entry["$class"];
+               array.push(entry);
             });
             result[key].value = array;
           }
