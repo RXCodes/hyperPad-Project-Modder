@@ -226,6 +226,7 @@ window.extract = function(data) {
       }
       parseArray("array");
       parseArray("buttons");
+      parseArray("images");
         
       // handle apple data with dictionaries
       function parseDictionary(key) {
