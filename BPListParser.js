@@ -213,12 +213,13 @@ window.extract = function(data) {
       // handle apple data with arrays
       function parseArray(key) {
         try {
-          if (result[key]["NS.objects"]) {
-            delete result[key]["NS.objects"]["$class"];
+          if (result[key].value["NS.objects"]) {
+            delete result[key].value["NS.objects"]["$class"];
             let array = [];
-            result[key]["NS.objects"].forEach(function(entry) {
+            result[key].value["NS.objects"].forEach(function(entry) {
                delete entry["$class"];
             });
+            result[key].value = array;
           }
         } catch(e) {};
       }
@@ -226,31 +227,26 @@ window.extract = function(data) {
       parseArray("buttons");
         
       // handle apple data with dictionaries
-      try {
-        if (result.params.type == "Dictionary") {
-          handleApple(result.params);
-        }
-      } catch(e) {};
-      try {
-        if (result.headers.type == "Dictionary") {
-          handleApple(result.headers);
-        }
-      } catch(e) {};
-      try {
-        if (result.keyValues.type == "Dictionary") {
-          handleApple(result.keyValues);
-        }
-      } catch(e) {};
-      try {
-        if (result["multipart/form-data"].type == "Dictionary") {
-          handleApple(result["multipart/form-data"]);
-        }
-      } catch(e) {};
-      try {
-        if (result["x-www-form-url-encoded"].type == "Dictionary") {
-          handleApple(result["x-www-form-url-encoded"]);
-        }
-      } catch(e) {};
+      function parseDictionary(key) {
+        try {
+          if (result[key].value["NS.objects"]) {
+            delete result[key].value["$class"];
+            let dictionary = {};
+            let i = 0;
+            Object.keys(result[key].value["NS.keys"]).forEach(function(entry) {
+               dictionary[entry] = result[key].value["NS.objects"][i];
+               i++;
+            });
+            result[key].value = dictionary;
+          }
+        } catch(e) {};
+      }
+      parseDictionary("keyValues");
+      parseDictionary("params");
+      parseDictionary("headers");
+      parseDictionary("multipart/form-data");
+      parseDictionary("x-www-form-url-encoded");
+      parseDictionary("multipart/form-data");
 
       // return output
       return result;
