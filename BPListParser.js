@@ -212,16 +212,17 @@ window.extract = function(data) {
         
       // handle apple data with arrays
       try {
-        if (result.buttons.type == "Array") {
+        if (result.buttons.value) {
           result.buttons.value.forEach(function(entry) {
              handleApple(entry);
           });
         }
       } catch(e) {};
       try {
-        if (result.array.type == "Array") {
+        if (result.array.value) {
           result.array.value.forEach(function(entry) {
              handleApple(entry);
+             console.debug(entry);
           });
         }
       } catch(e) {};
