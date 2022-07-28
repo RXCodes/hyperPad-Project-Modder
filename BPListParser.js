@@ -236,6 +236,9 @@ window.extract = function(data) {
             let i = 0;
             Object.keys(result[key].value["NS.keys"]).forEach(function(entry) {
                dictionary[entry] = result[key].value["NS.objects"][i];
+               if (dictionary[entry].valueKey == "$null") {
+                  dictionary[entry].valueKey = null;
+               }
                i++;
             });
             result[key].value = dictionary;
