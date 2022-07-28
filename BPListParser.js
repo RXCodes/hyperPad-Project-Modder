@@ -226,7 +226,25 @@ window.extract = function(data) {
       }
       parseArray("array");
       parseArray("buttons");
-      parseArray("images");
+      
+      // handle image sequence in Play Animation
+      try {
+        if (result["images"].value["NS.objects"]) {
+          delete result["images"].value["NS.objects"]["$class"];
+          let array = [];
+          result["images"].value["NS.objects"].forEach(function(entry) {
+             delete entry["$class"];
+             let dict = {};
+             let i = 0;
+             entry["NS.keys"].forEach(function(k) {
+               dict[k] = entry["NS.objects"][i];
+               i++;
+             });
+             array.push(dict);
+          });
+          result["images"].value = array;
+        }
+      } catch(e) {};
         
       // handle apple data with dictionaries
       function parseDictionary(key) {
