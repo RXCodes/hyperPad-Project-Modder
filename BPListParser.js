@@ -211,21 +211,19 @@ window.extract = function(data) {
       } catch(e) {};
         
       // handle apple data with arrays
-      try {
-        if (result.buttons.value) {
-          result.buttons.value.forEach(function(entry) {
-             handleApple(entry);
-          });
-        }
-      } catch(e) {};
-      try {
-        if (result.array.value) {
-          result.array.value.forEach(function(entry) {
-             handleApple(entry);
-             console.debug(entry);
-          });
-        }
-      } catch(e) {};
+      function parseArray(key) {
+        try {
+          if (result[key]["NS.objects"]) {
+            delete result[key]["NS.objects"]["$class"];
+            let array = [];
+            result[key]["NS.objects"].forEach(function(entry) {
+               delete entry["$class"];
+            });
+          }
+        } catch(e) {};
+      }
+      parseArray("array");
+      parseArray("buttons");
         
       // handle apple data with dictionaries
       try {
