@@ -229,10 +229,10 @@ window.extract = function(data) {
       
       // handle image sequence in Play Animation
       try {
-        if (result["images"].value["NS.objects"]) {
-          delete result["images"].value["NS.objects"]["$class"];
+        if (result["images"]["NS.objects"]) {
+          delete result["images"]["NS.objects"]["$class"];
           let array = [];
-          result["images"].value["NS.objects"].forEach(function(entry) {
+          result["images"]["NS.objects"].forEach(function(entry) {
              delete entry["$class"];
              let dict = {};
              let i = 0;
@@ -242,7 +242,7 @@ window.extract = function(data) {
              });
              array.push(dict);
           });
-          result["images"].value = array;
+          result["images"] = array;
         }
       } catch(e) {};
         
