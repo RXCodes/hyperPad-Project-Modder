@@ -201,15 +201,15 @@ window.extract = function(data) {
       }
         
       // handle apple data with box containers
-      try {
-        Object.keys(result.control).forEach(function(k) {
-          try {
-            if (result.control[k]["NS.string"]) {
-              result.control[k] = result.control[k]["NS.string"];
-            }
-          } catch(e) {};
-        });
-      } catch(e) {};
+      // try {
+      //  Object.keys(result.control).forEach(function(k) {
+      //    try {
+      //      if (result.control[k]["NS.string"]) {
+      //        result.control[k] = result.control[k]["NS.string"];
+      //      }
+      //    } catch(e) {};
+      //  });
+      //} catch(e) {};
         
       // handle apple data with arrays and dictionaries
       try {
