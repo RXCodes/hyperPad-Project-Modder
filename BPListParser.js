@@ -156,8 +156,7 @@ window.extract = function(data) {
           Object.keys(v).forEach(function(k) {
             if (Buffer.isBuffer(v[k])) {
               let data = v[k].toString();
-              v = data;
-              
+              v = data;    
             }
           });
         } catch (e) { };
@@ -201,29 +200,30 @@ window.extract = function(data) {
       }
         
       // handle apple data with box containers
-      // try {
-      //  Object.keys(result.control).forEach(function(k) {
-      //    try {
-      //      if (result.control[k]["NS.string"]) {
-      //        result.control[k] = result.control[k]["NS.string"];
-      //      }
-      //    } catch(e) {};
-      //  });
-      //} catch(e) {};
-        
-      // handle apple data with arrays and dictionaries
       try {
-        Object.keys(result).forEach(function(k) {
-          let data = result[k];
-          if (data.type == "Array") {
-            result[k].value.forEach(function(x) {
-              handleApple(x);
-            });
-          }
-          if (data.type == "Dictionary") {
-            handleApple(data[k].value);
-          }
+        Object.keys(result.control).forEach(function(k) {
+          try {
+            if (result.control[k]["NS.string"]) {
+              result.control[k] = result.control[k]["NS.string"];
+            }
+          } catch(e) {};
         });
+      } catch(e) {};
+        
+      // handle apple data with arrays
+      try {
+        if (result.buttons.type == "Array") {
+          result.buttons.value.forEach(function(entry) {
+             handleApple(entry);
+          });
+        }
+      } catch(e) {};
+      try {
+        if (result.array.type == "Array") {
+          result.array.value.forEach(function(entry) {
+             handleApple(entry);
+          });
+        }
       } catch(e) {};
 
       // return output
