@@ -225,6 +225,33 @@ window.extract = function(data) {
           });
         }
       } catch(e) {};
+        
+      // handle apple data with dictionaries
+      try {
+        if (result.params.type == "Dictionary") {
+          handleApple(result.params);
+        }
+      } catch(e) {};
+      try {
+        if (result.headers.type == "Dictionary") {
+          handleApple(result.headers);
+        }
+      } catch(e) {};
+      try {
+        if (result.keyValues.type == "Dictionary") {
+          handleApple(result.keyValues);
+        }
+      } catch(e) {};
+      try {
+        if (result["multipart/form-data"].type == "Dictionary") {
+          handleApple(result["multipart/form-data"]);
+        }
+      } catch(e) {};
+      try {
+        if (result["x-www-form-url-encoded"].type == "Dictionary") {
+          handleApple(result["x-www-form-url-encoded"]);
+        }
+      } catch(e) {};
 
       // return output
       return result;
