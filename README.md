@@ -51,4 +51,4 @@ View the earlier versions of hyperPad Project Modder.
 - v0.12 **(Current)**: https://rxcodes.github.io/hyperPad-Project-Modder/
 
 ## Alpha Stage
-`Coming soon...`
+`Coming soon...?`
